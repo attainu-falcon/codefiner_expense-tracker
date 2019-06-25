@@ -1,0 +1,151 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styling for WelcomePage i.e. 'home.hbs' */
+.header{
+    height: 50px;
+    position: absolute;
+    background-color:#8C8CD8;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    width: 100%; 
+
+}
+#signup-btn{
+    position: absolute;
+    top: 400px;
+    right: 113px;
+    padding: 12px 51px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+#signin-btn{
+    position: absolute;
+    top: 430px;
+    right: 113px;
+    padding: 12px 55px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+#signup-btn:hover, #signin-btn:hover {
+    opacity: 1;
+    color: black;
+}
+.vl {
+    border-left: 3px solid #8282FF;
+    height: 550px;
+    opacity: 0.8;
+    position: absolute;
+    left: 70%;
+    top:170px;
+    margin-left: -3px;
+  }
+
+
+.reg-form{
+    width: 300px;
+    height: 5000px;
+    position: absolute;
+    left: 50%;
+    right:50%;
+    border: 1px solid black;
+}
+
+/* Styling for 'signup.hbs' */
+.containerSignup{
+    width: 332px;
+    position: absolute;
+    top: 180px;
+    left: 525px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 5px 10px #8C8CD8;
+}
+input[type=text], input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #8C8CD8;
+    color: white;
+  }
+  input[type=submit] {
+    width: 100%;
+    background-color: #8C8CD8;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input[type=submit]:hover{
+    background-color: #5959B2;
+   }
+  .header{
+    height: 50px;
+    position: absolute;
+    background-color:#8C8CD8;
+    margin-left: -8px;
+    margin-right: 0;
+    margin-top: -8px;
+    width: 100%; 
+  }
+  .signin-block{
+    position: absolute;
+    top: 620px;
+    left: 584px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 5px 10px #8C8CD8;
+  }
+  .signin-block a{
+    padding: 5px;
+    text-decoration: none;
+    opacity: 0.85;
+  }
+  .signin-block a:hover{
+    opacity: 1;
+  }
+
+/* Styling for signin page'signin.hbs' */
+.containerSignin{
+    width: 332px;
+    position: absolute;
+    top: 269px;
+    left: 525px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 5px 10px #8C8CD8;
+}
+.signup-block{
+    position: absolute;
+    top: 529px;
+    left: 594px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 5px 10px #8C8CD8;
+  }
+  .signup-block a{
+    padding: 5px;
+    text-decoration: none;
+    opacity: 0.85;
+  }
+  .signup-block a:hover{
+    opacity: 1;
+  }
