@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Profile</title>
+</head>
+<body>
+    <h3>Welcome</h3>
+    <h2>This is the profile page</h2>
+    <button id="addExpense">addExpense</button>
+
+    <div class="pop-up-addExpense" style="display: none;" id="myForm">
+         <form action="/addExpense" method="POST">
+               <input type="text" placeholder="Type Expense" id="expenseAmount" name="expense"> <br>
+               <input type="submit" id="addExpense-submit">
+         </form>
+    </div>
+</body>
+<script>
+    var addExpense = document.getElementById('addExpense');
+   
+    function openForm() {
+    document.getElementById('myForm').style.display="block";
+};
+   
+    addExpense.addEventListener('click', openForm());
+
+</script>
+</html>

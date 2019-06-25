@@ -1,0 +1,26 @@
+{
+  "name": "CodeFiner-Project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishek-mazumdar-au2/CodeFiner-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhishek-mazumdar-au2/CodeFiner-Project/issues"
+  },
+  "homepage": "https://github.com/abhishek-mazumdar-au2/CodeFiner-Project#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "mongodb": "^3.2.7"
+  }
+}
