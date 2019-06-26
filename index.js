@@ -17,7 +17,7 @@ var app = express();
 app.use(express.static('public'));
 
 //Initialise bodyParser and express-session
-app.use(bodyparser.urlencoded());
+app.use(bodyparser.urlencoded({extended: true}));
 app.use(session({secret: "Your secret key"}));
 
 //Initialise template engine (handlebars)
@@ -38,4 +38,4 @@ app.use('', home);
 app.use('/users', users);
 
 
-app.listen(3000)
+app.listen(3009)
