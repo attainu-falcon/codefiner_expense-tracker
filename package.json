@@ -1,0 +1,22 @@
+{
+  "name": "codefiner_expense-tracker",
+  "version": "1.0.0",
+  "description": "expense tracker for users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/attainu-falcon/codefiner_expense-tracker.git"
+  },
+  "author": "Abhishek Mazumdar, Ajay Chakravarthy, Alok Hazarika",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/attainu-falcon/codefiner_expense-tracker/issues"
+  },
+  "homepage": "https://github.com/attainu-falcon/codefiner_expense-tracker#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
