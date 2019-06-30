@@ -55,10 +55,9 @@ app.use(express.static('public'));
 app.get('/user/graph', function(req,res) {
 
   db.collection('expenseDetails').find({id:'001'}).toArray( function(err, result) {
-    var marketing,transport,grocery;
+    var marketing,transport,grocery,household,utilities,entertainment,others;
     if (err) throw err;
-    console.log(result);
-    marketing = 0; transport = 0; grocery = 0;
+    marketing = 0; transport = 0; grocery = 0; household =0; utility = 0; entertainment = 0; others = 0;
     for (var i = 0; i < result.length; i++) {
       if ( result[i].category == 'marketing') {
         var amt = parseInt(result[i].amount);
@@ -69,15 +68,31 @@ app.get('/user/graph', function(req,res) {
       } else if (result[i].category == 'grocery') {
         var amt = parseInt(result[i].amount);
         grocery += Number(amt);
+      }else if (result[i].category == 'household') {
+        var amt = parseInt(result[i].amount);
+        household += Number(amt);
+      }else if (result[i].category == 'utilities') {
+        var amt = parseInt(result[i].amount);
+        utility += Number(amt);
+      }else if (result[i].category == 'entertainment') {
+        var amt = parseInt(result[i].amount);
+        entertainment += Number(amt);
+      }else if (result[i].category == 'others') {
+        var amt = parseInt(result[i].amount);
+        others += Number(amt);
       }
 
     }
-    console.log(marketing) ;
     return res.render('groupexpense', {title:"Expenses Category",
                                       mktamount: marketing,
                                       trpamount: transport,
-                                      grcamount: grocery
+                                      grcamount: grocery,
+                                      hslamount: household,
+                                      utlamount: utility,
+                                      entamount: entertainment,
+                                      othamount: others
                                     });
+
   });
 
 });
@@ -89,7 +104,11 @@ app.get('/user/graph', function(req,res) {
 
 
 // app.get('/user/graph/month', function(req,res) {
-//   res.send('Monthly graph');
+//   db.collection('expenseDetails').find({date: new Date("2019-06-09")}).toArray( function(err, result) {
+//     if (err) throw err;
+//     console.log(result)
+//   })
+//   res.render('monthexp');
 // });
 //
 // app.get('/user/graph/year', function(req,res) {
