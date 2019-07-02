@@ -19,25 +19,21 @@ router.get('/signin', function(req, res ){
 });
 
 router.post('/signin',function(req,res){
-    var User= {
-           user: req.body.username,
-           pass: req.body.password
-    }
+    var profileUser= {
+           username: req.body.username,
+           password: req.body.password
+    } 
     
-    db.collection('userRegister').findOne(User, function(err, result){
+    db.collection('userRegister').findOne(profileUser, function(err, result){
       
         if(err) throw err;
         else if(!result) {
             res.render('signin', {error: 'Not a valid username.'})
         }else{
-            if(result) {
                 req.session.loggedIn = true; 
+                req.session.username = req.body.username;
                 console.log("Success")
-                res.render('profile', {msg: "Welcome"})   // allow the user
-            }else{
-                res.render('signin', {error: "Invalid credentials"})
-                console.log('Invalid credentials.')
-            }
+                res.render('profile', {msg: "Welcome"})   // allow the user                        
         }
     })
     
@@ -51,5 +47,10 @@ router.get('/profile', function(req, res){
     }  res.render('profile', {title: 'Profile'})
 }) 
 
+// //Posting the add-expense
+// router.post('/add-expense', function(req, res) {
+//     db.collection('userRegister').updateOne({username: req.session.username}, {$set: {expense: }})
+//     }
+// )
 
 module.exports = router;

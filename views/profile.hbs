@@ -14,10 +14,11 @@
 
 <div class="header"></div>
 {{!-- addExpense Button --}}
-<a class="add-expense-button" href="#">ADD EXPENSE</a>
+<a class="hvr-underline-reveal" id="add-expense-button" href="#" onclick=openForm()>ADD EXPENSE</a>
 {{!-- <i id="add-btn" class="fas fa-plus-circle" onclick="alertFnc()"></i> --}}
-<div class="container-addExpense">
-    <form class="form-signin" method="POST" action="/users/signup">
+<div id="add-expense-container" class="container-addExpense">
+   <a id="close-add-expense" onclick="closeForm()" href="#"><p>&#10006;</p></a>
+    <form class="form-signin" method="POST" action="/users/add-expense">
                <div class="form-group">
                  <div class="expense-form-text-date">
                     <strong>Date</strong> 
@@ -80,8 +81,10 @@
         </form>
 </div>
 <script>
-      document.getElementById('add-btn').addEventListener('click', function(){
-         console.log('Clicked..Woooh')
-
-      })   
+      function openForm() {
+  document.getElementById("add-expense-container").style.display = "block";
+} 
+      function closeForm() {
+  document.getElementById("add-expense-container").style.display = "none";
+} 
 </script>
