@@ -11,3 +11,77 @@
        <strong>{{error}}</strong>
     </div>
  {{/if}}
+
+<div class="header"></div>
+{{!-- addExpense Button --}}
+<a class="add-expense-button" href="#">ADD EXPENSE</a>
+{{!-- <i id="add-btn" class="fas fa-plus-circle" onclick="alertFnc()"></i> --}}
+<div class="container-addExpense">
+    <form class="form-signin" method="POST" action="/users/signup">
+               <div class="form-group">
+                 <div class="expense-form-text-date">
+                    <strong>Date</strong> 
+                 </div>
+                 <div class="expense-form-input-date">
+                    <input name="date" id="inputsForExpense" type="date" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Date" required >
+                 </div>           
+               </div>                
+               <div class="form-group">
+                    <div class="expense-form-text-category">
+                       <strong>Category</strong>
+                    </div>    
+                    <div class="expense-form-input-category">
+                      <select id="inputsForExpense" name="Category">
+                        <option value="Market">Market</option>
+                        <option value="Electricity Bills">Electricity Bills</option>
+                        <option value="Carwash">Carwash</option>
+                        <option value="Breakfastt">Breakfast</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Tution fees">Tution fees</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Religious/Spiriual">Religious/Spiriual</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Vacation">Vacation</option>
+                      </select>
+                    </div>                       
+                 </div>  
+                 <div class="form-group">
+                    <div class="expense-form-text-currency">
+                       <strong>Currency</strong>
+                    </div>    
+                    <div class="expense-form-input-currency">
+                       <select id="inputsForExpense" name="Currency">
+                      <option value="Market">INR</option>
+                      <option value="Electricity Bills">USD</option>
+                      <option value="Carwash">..</option>
+                      <option value="Breakfastt">Breakfast</option>
+                      <option value="Dinner">Dinner</option>
+                      <option value="Tution fees">Tution fees</option>
+                      <option value="Shopping">Shopping</option>
+                      <option value="Religious/Spiriual">Religious/Spiriual</option>
+                      <option value="Travel">Travel</option>
+                      <option value="Vacation">Vacation</option>
+                     </select>
+                    </div>                       
+                 </div>                                  
+                 <div class="form-group"> 
+                  <div class="expense-form-text-expense">
+                     <strong>Expense</strong>
+                 </div>
+                    <div class="expense-form-input-expense">
+                       <input name="expense" type="number" class="form-control" id="expense" aria-describedby="emailHelp" placeholder="Enter your expense" autofocus required >
+                    </div>
+                 </div>                                        
+                 
+               <div id="sbt-btn-expense" >
+                    <input type="submit">
+               </div>
+            
+        </form>
+</div>
+<script>
+      document.getElementById('add-btn').addEventListener('click', function(){
+         console.log('Clicked..Woooh')
+
+      })   
+</script>

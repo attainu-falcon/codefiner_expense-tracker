@@ -8,7 +8,7 @@
 .header{
     height: 50px;
     position: absolute;
-    background-color:#8C8CD8;
+    background-color:#60C394;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -20,7 +20,7 @@
     top: 400px;
     right: 113px;
     padding: 12px 51px;
-    background-color: blue;
+    background-color: #0EA4FE;
     color: white;
     text-decoration: none;
     opacity: 0.6;
@@ -31,7 +31,7 @@
     top: 430px;
     right: 113px;
     padding: 12px 55px;
-    background-color: blue;
+    background-color: #0EA4FE;
     color: white;
     text-decoration: none;
     opacity: 0.6;
@@ -42,7 +42,7 @@
     color: black;
 }
 .vl {
-    border-left: 3px solid #8282FF;
+    border-left: 3px solid #FB7C28;
     height: 550px;
     opacity: 0.8;
     position: absolute;
@@ -70,7 +70,7 @@
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    box-shadow: 5px 10px #8C8CD8;
+    box-shadow: 5px 10px #0EA4FE;
 }
 input[type=text], input[type=email], input[type=password] {
     width: 100%;
@@ -78,12 +78,12 @@ input[type=text], input[type=email], input[type=password] {
     margin: 8px 0;
     box-sizing: border-box;
     border: none;
-    background-color: #8C8CD8;
+    background-color: #0EA4FE;
     color: white;
   }
   input[type=submit] {
     width: 100%;
-    background-color: #8C8CD8;
+    background-color: #0EA4FE;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -92,12 +92,12 @@ input[type=text], input[type=email], input[type=password] {
     cursor: pointer;
   }
   input[type=submit]:hover{
-    background-color: #5959B2;
+    background-color: #5BC0FF;
    }
   .header{
     height: 50px;
     position: absolute;
-    background-color:#8C8CD8;
+    background-color:#0EA4FE;
     margin-left: -8px;
     margin-right: 0;
     margin-top: -8px;
@@ -110,7 +110,7 @@ input[type=text], input[type=email], input[type=password] {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    box-shadow: 5px 10px #8C8CD8;
+    box-shadow: 5px 10px #0EA4FE;
   }
   .signin-block a{
     padding: 5px;
@@ -130,7 +130,7 @@ input[type=text], input[type=email], input[type=password] {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    box-shadow: 5px 10px #8C8CD8;
+    box-shadow: 5px 10px #0EA4FE;
 }
 .signup-block{
     position: absolute;
@@ -139,7 +139,7 @@ input[type=text], input[type=email], input[type=password] {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    box-shadow: 5px 10px #8C8CD8;
+    box-shadow: 5px 10px #0EA4FE;
   }
   .signup-block a{
     padding: 5px;
@@ -149,3 +149,74 @@ input[type=text], input[type=email], input[type=password] {
   .signup-block a:hover{
     opacity: 1;
   }
+/* Styling the profile page */
+
+#add-btn{
+  position: absolute;
+  top:30px;
+  right:30px;
+}
+.container-addExpense{
+  width: 302px;
+  position: absolute;
+  top: 269px;
+  height:315px;
+  left: 525px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 10px #0EA4FE;
+}
+/* #inputsForExpense{
+  position: absolute;
+  right:10%;
+  top:20%;
+} */
+
+/* .expense-form-text-date{
+  position: absolute;
+  top:25px;
+  left: 10%;
+}
+.expense-form-input-date{
+  position: absolute;
+  top:25px;
+  right: 10%;
+}
+.expense-form-text-category{
+  position: absolute;
+  top:75px;
+  left: 10%;
+}
+.expense-form-input-category{
+  position: absolute;
+  top:75px;
+  right: 10%;
+}
+.expense-form-text-currency{
+  position: absolute;
+  top:125px;
+  left: 10%;
+}
+.expense-form-input-currency{
+  position: absolute;
+  top:125px;
+  right: 10%;
+}
+.expense-form-text-expense{
+  position: absolute;
+  top:175px;
+  left: 10%;
+}
+.expense-form-input-expense{
+  position: absolute;
+  top:175px;
+  right: 10%;
+}
+#sbt-btn-expense{
+  margin-bottom: 5%;
+} */
+
+.add-expense-button{
+  
+}
