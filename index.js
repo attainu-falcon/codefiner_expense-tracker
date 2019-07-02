@@ -2,8 +2,12 @@ var express = require('express');
 var app = express();
 
 var exphbs  = require('express-handlebars');
-app.engine('.hbs', exphbs({extname: '.hbs',defaultLayout: 'main'}));
+var hbsEngine = exphbs.create({extname: '.hbs'});
+
+app.engine('.hbs',hbsEngine.engine);
 app.set('view engine', '.hbs');
+app.set('views', __dirname + '/views')
+
 
 var mongoClient = require('mongodb').MongoClient;
 var db;
@@ -16,40 +20,6 @@ mongoClient.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true }, func
 
 app.use(express.urlencoded());
 app.use(express.static('public'));
-// app.use(function(req,res,next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-
-// app.get('/', function (req,res) {
-//   res.sendfile('index.html');
-// });
-//
-// app.get('/signup', function(req,res) {
-//   res.send('Sign-up page');
-// });
-//
-// app.get('/login', function(req,res) {
-//   res.send('login page <a href="/user"> Login Link </a>');
-// });
-//
-// app.get('/user', function(req,res) {
-//   res.send('Expense Details <a href="/user/add"> Add Expense </a> <br/><a href="/user/graph"> View Graph </a> <br/> <a href="/user/setbudget"> Set Budget </a>');
-// });
-//
-// app.get('/user/add', function(req,res) {
-//   res.send('Add new Expense');
-// });
-
-
-
-
-
-// res.send('Catgory Wise Expenses <br/><a href="/user/graph/month"> View month </a> <br/> <a href="/user/graph/year"> View year </a> <br/> <a href="/user/graph/alltime"> View All time </a> ');
-
-
-
 
 
 app.get('/user/graph', function(req,res) {
@@ -83,16 +53,38 @@ app.get('/user/graph', function(req,res) {
       }
 
     }
-    return res.render('groupexpense', {title:"Expenses Category",
+    return res.render('groupExp', {title:"Expenses Category",
                                       mktamount: marketing,
                                       trpamount: transport,
                                       grcamount: grocery,
                                       hslamount: household,
                                       utlamount: utility,
                                       entamount: entertainment,
-                                      othamount: others
+                                      othamount: others,
+
                                     });
 
+  });
+
+});
+
+
+
+app.get('/user/graph/month', function(req,res) {
+
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] },category:"marketing"}).toArray( function(err, result) {
+    var amount = []; var exp = [];
+    if (err) throw err;
+    for (var i = 0; i < result.length; i++) {
+      var expAmt = result[i].amount;
+      amount.push(expAmt);
+    }
+    for (var i = 0; i < result.length; i++) {
+      exp.push('# Expense ' + (i+1))
+    }
+    return res.render('monthExp',{title:"Monthly Graph",
+                          amount:amount,
+                          expense: exp});
   });
 
 });
@@ -103,21 +95,31 @@ app.get('/user/graph', function(req,res) {
 
 
 
-// app.get('/user/graph/month', function(req,res) {
-//   db.collection('expenseDetails').find({date: new Date("2019-06-09")}).toArray( function(err, result) {
-//     if (err) throw err;
-//     console.log(result)
-//   })
-//   res.render('monthexp');
-// });
-//
-// app.get('/user/graph/year', function(req,res) {
-//   res.send('Yearly graph');
-// });
-//
-// app.get('/user/graph/alltime', function(req,res) {
-//   res.send('All time Expense graph');
-// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get('/user/graph/year', function(req,res) {
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $year: "$date" },{$year:{ date: new Date() }}] },category:"marketing"}).toArray( function(err, result) {
+    if (err) throw err;
+    console.log(result);
+  });
+  res.render('yearExp');
+});
+
+app.get('/user/graph/alltime', function(req,res) {
+  res.render('allTimeExp');
+});
 
 
 

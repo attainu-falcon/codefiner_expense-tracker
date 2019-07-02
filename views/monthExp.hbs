@@ -1,0 +1,40 @@
+<main>
+  <canvas id="canvas" style="width:90%;"></canvas>
+</main>
+<script>
+var ctx = document.getElementById('canvas').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [1,2,3,4], /*{{expense}}*/
+      datasets: [{
+          label: 'Expense in INR',
+          data:[{{amount}}],
+
+          backgroundColor:[
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(54, 162, 235, 0.2)'
+          ],
+          borderColor: [
+
+              'rgba(54, 162, 235, 1)'
+
+          ],
+          borderWidth: 1
+        }]
+       },
+
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+</script>
