@@ -68,43 +68,23 @@ app.get('/user/graph', function(req,res) {
 
 });
 
-
+// {$month:{ date: new Date() }}
 
 app.get('/user/graph/month', function(req,res) {
-
-  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] },category:"marketing"}).toArray( function(err, result) {
-    var amount = []; var exp = [];
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"marketing"}).toArray( function(err, result) {
+    var amount = [];
     if (err) throw err;
     for (var i = 0; i < result.length; i++) {
       var expAmt = result[i].amount;
       amount.push(expAmt);
     }
-    for (var i = 0; i < result.length; i++) {
-      exp.push('# Expense ' + (i+1))
-    }
     return res.render('monthExp',{title:"Monthly Graph",
-                          amount:amount,
-                          expense: exp});
+                                 amount:amount,
+                          });
+
   });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -123,16 +103,6 @@ app.get('/user/graph/alltime', function(req,res) {
 
 
 
-
-
-
-
-
-
-
-// app.get('/user/setbudget', function(req,res) {
-//   res.send('Set Budget and see expenditure vs budget');
-// });
 
 
 app.listen(3000);

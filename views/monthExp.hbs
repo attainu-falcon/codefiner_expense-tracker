@@ -1,31 +1,28 @@
-<main>
-  <canvas id="canvas" style="width:90%;"></canvas>
-</main>
+<div id="barChartContainer">
+    <canvas id="canvas" style="width:80%;"></canvas>
+</div>
 <script>
 var ctx = document.getElementById('canvas').getContext('2d');
+var bgcol = []; var bdcol=[];
+var data1 = {};
+data1.labels = [];
+for (var i = 0; i < [{{amount}}].length; i++) {
+  bgcol.push('rgba(54, 162, 235, 0.2)');
+  bdcol.push('rgba(54, 162, 235, 1)');
+  data1.labels.push('Exp# ' +(i+1));
+}
+
+data1.datasets = [{
+  label: 'Expense in INR' ,
+  data: [{{amount}}],
+  backgroundColor:bgcol,
+  borderColor: bdcol,
+  borderWidth: 1
+}];
+
 var myChart = new Chart(ctx, {
     type: 'bar',
-    data: {
-      labels: [1,2,3,4], /*{{expense}}*/
-      datasets: [{
-          label: 'Expense in INR',
-          data:[{{amount}}],
-
-          backgroundColor:[
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(54, 162, 235, 0.2)'
-          ],
-          borderColor: [
-
-              'rgba(54, 162, 235, 1)'
-
-          ],
-          borderWidth: 1
-        }]
-       },
-
+    data: data1,
     options: {
         scales: {
             yAxes: [{
