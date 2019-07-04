@@ -8,7 +8,8 @@ router.get('/signup', function(req, res ){
 
 //Posting registration form
 router.post('/signup', function(req, res) { 
-    db.collection('userRegister').insertOne({name:req.body.name, email:req.body.email, username:req.body.username, password:req.body.password});
+    var ObjectID = require('mongodb').ObjectID;
+    db.collection('userRegister').insertOne({_id:ObjectID, date: new Date(), name:req.body.name, email:req.body.email, username:req.body.username, password:req.body.password});
     res.render('signin',{title: 'Login', msg: 'Succefully registered. Now you may login.'});
     console.log(JSON.stringify(req.body) + " added to the db.userRegister"); 
 });
@@ -36,21 +37,30 @@ router.post('/signin',function(req,res){
                 res.render('profile', {msg: "Welcome"})   // allow the user                        
         }
     })
-    
-});
+    // for(var i=0; i<allData.length; i++) {
+    //     if(profileUser){
+    //         req.session.loggedIn=true;
+    //         req.session.username = req.body.username;
+    //         res.render('profile', {msg: "Welcome"})
+    //     }else{
+    //         res.render('signin', {error: "Oops wrong credentials"});
+    //         }
+    //     }
+    });
 
 //Profile routings
 
 router.get('/profile', function(req, res){
     if(req.session.loggedIn===true) {
-        res.render('profile', {title: 'Profile'})
-    }  res.render('profile', {title: 'Profile'})
+        res.render('profile', {title: 'Profile', msg: 'Welcome Home'})
+    }res.render('profile', {title: 'Profile', msg: 'Welcome Home'})
 }) 
 
-// //Posting the add-expense
-// router.post('/add-expense', function(req, res) {
-//     db.collection('userRegister').updateOne({username: req.session.username}, {$set: {expense: }})
-//     }
-// )
+//Posting the add-expense
+router.post('/add-expense', function(req, res) {
+    console.log(req.body);
+    db.collection('expenseDetails').insert({amount: req.body.expense, date: new Date()})
+    }
+)
 
 module.exports = router;
