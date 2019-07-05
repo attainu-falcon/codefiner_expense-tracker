@@ -68,19 +68,22 @@ app.get('/user/graph', function(req,res) {
 
 });
 
-// {$month:{ date: new Date() }}
+
 
 app.get('/user/graph/month', function(req,res) {
-  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"marketing"}).toArray( function(err, result) {
-    var amount = [];
+  db.collection('expenseDetails').find({}).toArray( function(err, result) {
+    // var amount = [];
     if (err) throw err;
-    for (var i = 0; i < result.length; i++) {
-      var expAmt = result[i].amount;
-      amount.push(expAmt);
-    }
-    return res.render('monthExp',{title:"Monthly Graph",
-                                 amount:amount,
-                          });
+    console.log(result);
+    // for (var i = 0; i < result.length; i++) {
+    //   var expAmt = result[i].amount;
+    //   amount.push(expAmt);
+    
+    // }
+    // console.log(amount);
+    // return res.render('monthExp',{title:"Monthly Graph",
+    //                              amount:amount
+    //                       });
 
   });
 
@@ -101,8 +104,19 @@ app.get('/user/graph/alltime', function(req,res) {
   res.render('allTimeExp');
 });
 
+app.get('/user/setbudget',function (req,res){
+  db.collection('expenseDetails').find({id:"001"}).toArray( function(err, result) {
+    if (err) throw err;
+    
+    console.log(result);
+  });
 
+      // return res.render('expvsbgt',{title:"Monthly Graph",
+      //                            amount:amount,
+      //                     });
+  });
+ 
 
-
+//save the file
 
 app.listen(3000);
