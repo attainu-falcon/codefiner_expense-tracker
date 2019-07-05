@@ -279,3 +279,6 @@ input[type=text], input[type=email], input[type=password] {
   text-decoration: none;
   transform: translateY(0);
 }
+#comment{
+  height: 80px;
+}

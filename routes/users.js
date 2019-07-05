@@ -59,7 +59,20 @@ router.get('/profile', function(req, res){
 //Posting the add-expense
 router.post('/add-expense', function(req, res) {
     console.log(req.body);
-    db.collection('expenseDetails').insert({amount: req.body.expense, date: new Date()})
+    var expense = {
+    "amount": req.body.expense,
+    "category": req.body.category,
+    "currency": req.body.currency,
+    "date": new Date(),
+    "comment": req.body.comment
+    }
+    db.collection('expenseDetails').insert(expense, function(err, result){
+        if(err) throw err
+        else{
+            console.log(result);
+            res.render('profile', {msg: "New Expense added"})
+        }
+    })
     }
 )
 
