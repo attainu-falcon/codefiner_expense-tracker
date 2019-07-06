@@ -29,14 +29,17 @@ router.post('/signin',function(req,res){
       
         if(err) throw err;
         else if(!result) {
+            console.log('Oops')
             res.render('signin', {error: 'Not a valid username.'})
         }else{
                 req.session.loggedIn = true; 
                 req.session.username = req.body.username;
-                console.log("Success")
-                res.render('profile', {msg: "Welcome"})   // allow the user                        
-        }
-    })
+                console.log("Successful login for "+req.session.username);
+                // res.render('profile', {msg: "Welcome"})   // allow the user                        
+    }
+    // console.log('OOps')
+    res.redirect('/users/profile')      
+})
     // for(var i=0; i<allData.length; i++) {
     //     if(profileUser){
     //         req.session.loggedIn=true;
@@ -52,28 +55,68 @@ router.post('/signin',function(req,res){
 
 router.get('/profile', function(req, res){
     if(req.session.loggedIn===true) {
-        res.render('profile', {title: 'Profile', msg: 'Welcome Home'})
-    }res.render('profile', {title: 'Profile', msg: 'Welcome Home'})
+        res.render('profile', {title: 'Profile', msg: 'Welcome ' + req.session.username})
+    }
 }) 
+
+router.get('/logout', function(req, res)  {
+    console.log(req.session.username + " just logged out.")
+    req.session.destroy();
+    res.redirect('/users/signin');
+    
+})
+//Posting the set-budget
+router.post('/set-budget', function(req, res) {
+    var budget = {
+        "username": req.session.username,
+        "budget": req.body.budget, 
+        "date": new Date()
+        }
+    console.log("This is the budget " + budget);
+    db.collection('budgetDetails').insert(budget, function(err, budget){
+        if(err) throw err
+        else{
+            console.log(JSON.stringify(budget) + " was added by " + req.session.username);
+            res.redirect('/users/profile')
+        }
+    })
+})
 
 //Posting the add-expense
 router.post('/add-expense', function(req, res) {
-    console.log(req.body);
     var expense = {
+    "username":req.session.username,    
     "amount": req.body.expense,
     "category": req.body.category,
     "currency": req.body.currency,
     "date": new Date(),
     "comment": req.body.comment
     }
+    console.log(expense);
     db.collection('expenseDetails').insert(expense, function(err, result){
         if(err) throw err
         else{
-            console.log(result);
-            res.render('profile', {msg: "New Expense added"})
+            console.log(JSON.stringify(result) + " was added by " + req.session.username);
+            res.redirect('/users/profile')
+            // res.render('profile', {msg: "New Expense added"})
         }
     })
-    }
+  }
 )
+
+router.get('/api', function(req, res){
+    var user={username: req.session.username}
+    db.collection('expenseDetails').find(user).toArray(function(err, result) {
+        if (err) throw err;
+        res.json(result);
+    })
+})
+router.get('/apio', function(req, res){
+    var user={username: req.session.username}
+    db.collection('userRegister').find(user).toArray(function(err, result) {
+        if (err) throw err;
+        res.json(result);
+    })
+})
 
 module.exports = router;

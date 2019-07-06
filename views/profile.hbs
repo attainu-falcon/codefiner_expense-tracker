@@ -1,3 +1,8 @@
+{{!-- jqueryCDN         --}}
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous">
+   </script>
+
 {{#if msg}}
     <div id="alert-msg" class="alert alert-success text-center collapse">
        <a href="#" id="close-alert" class="close" data-dismiss="alert">&times;</a>
@@ -13,8 +18,32 @@
  {{/if}}
 
 <div class="header"></div>
+<nav id="nav" class = "navbar navbar-dark" style="background-color:#60C394;">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Expenses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">View Graph</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#" onclick=openBudgetForm()>Set Budget</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" id="add-expense-button" href="#" onclick=openForm()>Add New Expense</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/users/logout" id="logout-but">LOGOUT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/users/profile" id="hey">..</a>
+            </li>
+         </ul>
+      </nav>
+      <div id="here"></div>
 {{!-- addExpense Button --}}
-<a class="hvr-underline-reveal" id="add-expense-button" href="#" onclick=openForm()>ADD EXPENSE</a>
+{{!-- <a class="hvr-underline-reveal" id="add-expense-button" href="#" onclick=openForm()>ADD EXPENSE</a> --}}
+{{!-- <a class="" id="logout-button" href="/users/logout">LogOut</a> --}}
 {{!-- <i id="add-btn" class="fas fa-plus-circle" onclick="alertFnc()"></i> --}}
 <div id="add-expense-container" class="container-addExpense">
    <a id="close-add-expense" onclick="closeForm()" href="#"><p>&#10006;</p></a>
@@ -25,7 +54,7 @@
                        <strong>Category</strong>
                     </div>    
                     <div class="expense-form-input-category">
-                      <select id="inputsForExpense" name="Category">
+                      <select id="inputsForExpense" name="category">
                         <option value="Market">Market</option>
                         <option value="Electricity Bills">Electricity Bills</option>
                         <option value="Carwash">Carwash</option>
@@ -44,17 +73,17 @@
                        <strong>Currency</strong>
                     </div>    
                     <div class="expense-form-input-currency">
-                       <select id="inputsForExpense" name="Currency">
+                       <select id="inputsForExpense" name="currency">
                       <option value="Market">INR</option>
                       <option value="Electricity Bills">USD</option>
-                      <option value="Carwash">..</option>
-                      <option value="Breakfastt">Breakfast</option>
-                      <option value="Dinner">Dinner</option>
-                      <option value="Tution fees">Tution fees</option>
-                      <option value="Shopping">Shopping</option>
-                      <option value="Religious/Spiriual">Religious/Spiriual</option>
-                      <option value="Travel">Travel</option>
-                      <option value="Vacation">Vacation</option>
+                      <option value="Carwash">Taka</option>
+                      <option value="Breakfastt">KWD</option>
+                      <option value="Dinner">OMR</option>
+                      <option value="Tution fees">GPB</option>
+                      <option value="Shopping">AUD</option>
+                      <option value="Religious/Spiriual">EUR</option>
+                      <option value="Travel">CHF</option>
+                      <option value="Vacation">CAD</option>
                      </select>
                     </div>                       
                  </div>                                  
@@ -68,7 +97,7 @@
                  </div>     
                  <div class="form-group">
                   <label for="comment"><strong>Comment</strong></label>
-                  <textarea class="form-control" rows="5" id="comment"></textarea>
+                  <textarea required name="comment" class="form-control" rows="5" id="comment"></textarea>
                  </div>                                   
                  
                <div id="sbt-btn-expense" >
@@ -77,11 +106,65 @@
             
         </form>
 </div>
+
+{{!-- Set-Budget --}}
+<div id="set-budget-container" class="container-set-budget">
+   <a id="close-set-budget" onclick="closeBudgetForm()" href="#"><p>&#10006;</p></a>
+<form class="form-signin" method="POST" action="/users/set-budget">                                                                                         
+   <div class="form-group"> 
+      <div class="expense-form-text-expense">
+        <strong>Your Budget</strong>
+      </div>
+      <div class="budget form">
+        <input name="budget" type="number" class="form-control" id="budget" aria-describedby="emailHelp" placeholder="Enter your Budget" autofocus required >
+      </div>
+   </div>                     
+   <div id="sbt-btn-expense" >
+      <input type="submit">
+   </div>            
+</form>
+</div>
+
 <script>
       function openForm() {
   document.getElementById("add-expense-container").style.display = "block";
 } 
+      function openBudgetForm() {
+  document.getElementById("set-budget-container").style.display = "block";
+} 
       function closeForm() {
   document.getElementById("add-expense-container").style.display = "none";
 } 
+      function closeBudgetForm() {
+  document.getElementById("set-budget-container").style.display = "none";
+} 
+
+$.ajax({
+   url: "/users/api",
+   dataType: "JSON",
+   method: "get",
+   success: function(data) {
+      $('#here').append('<div id="allExpenses"></div>')
+      for(var i=0; i<data.length; i++) {
+     var str = data[i].date;
+     var time = str.substring(12, 20);
+     var rest = str.substring(0, 10);
+     var card  = "";   
+         card += '<div id="crdrex" class="card mb-3" style="max-width: 500px;">';
+         card += '<div id="crd" class="row no-gutters">';
+         card += '<a href="#"><p class="close-card">&#10006;</p></a>'  
+         card += '<div class="col-md-8">';
+         card += '<div class="card-body">';
+         card += '<h5 class="card-title">'+ data[i].currency +'</h5>';
+         card += '<p class="card-text">'+ data[i].comment +'</p>';
+         card += '<p class="card-text"><small class="text-muted">'+ rest +'</small></p>';
+         card += '</div>';
+         card += '</div>';
+         card += '</div>';
+         card += '</div>';         
+           $('#allExpenses').append(card);    
+      } 
+   }
+})
+
 </script>
