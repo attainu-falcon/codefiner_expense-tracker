@@ -1,5 +1,6 @@
 var express = require('express');
 var exphbs  = require('express-handlebars');
+var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoClient = require('mongodb').MongoClient;
 
@@ -15,10 +16,16 @@ var app = express();
 //My static folder will be set to 'public'
 app.use(express.static('public'));
 
+//Initialising the 'models'
+var Expense = require('./models/expenseDetails');
+
 
 //Initialise bodyParser and express-session
 app.use(express.urlencoded());
 app.use(session({secret: "Your secret key"}));
+
+// parse application/json
+app.use(bodyParser.json())
 
 
 //Initialise template engine (handlebars)
@@ -39,5 +46,14 @@ mongoClient.connect('mongodb://127.0.0.1:27017', {useNewUrlParser: true}, functi
 app.use('', home);
 app.use('/users', users);
 
-
-app.listen(process.env.PORT || 8080)
+app.get('/:id', function(req, res) {
+    var par = req.params;
+    console.log(par);
+    db.collection('expenseDetails').findOne(par, function(err, serf) {
+        if(err) throw err;
+        console.log(serf)
+        res.json(serf);
+    })
+})
+console.log('Magic Happens at PORT 8000');
+app.listen(process.env.PORT || 8000);

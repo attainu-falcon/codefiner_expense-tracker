@@ -35,9 +35,9 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="/users/logout" id="logout-but">LOGOUT</a>
             </li>
-            <li class="nav-item">
+            {{!-- <li class="nav-item">
               <a class="nav-link text-white" href="/users/profile" id="hey">..</a>
-            </li>
+            </li> --}}
          </ul>
       </nav>
       <div id="here"></div>
@@ -128,9 +128,11 @@
 <script>
       function openForm() {
   document.getElementById("add-expense-container").style.display = "block";
+  document.getElementById("set-budget-container").style.display = "none";
 } 
       function openBudgetForm() {
   document.getElementById("set-budget-container").style.display = "block";
+  document.getElementById("add-expense-container").style.display = "none";
 } 
       function closeForm() {
   document.getElementById("add-expense-container").style.display = "none";
@@ -143,21 +145,23 @@ $.ajax({
    url: "/users/api",
    dataType: "JSON",
    method: "get",
-   success: function(data) {
+   success: function(data) {;
       $('#here').append('<div id="allExpenses"></div>')
-      for(var i=0; i<data.length; i++) {
+      for(var i=0; i<data.length; i++) {   
      var str = data[i].date;
+     var id = data[i]._id;
      var time = str.substring(12, 20);
      var rest = str.substring(0, 10);
      var card  = "";   
          card += '<div id="crdrex" class="card mb-3" style="max-width: 500px;">';
          card += '<div id="crd" class="row no-gutters">';
-         card += '<a href="#"><p class="close-card">&#10006;</p></a>'  
+         card += '<a href="#"><p class="close-card">&#10006;</p></a>'
+         card += '<a href="/'+ id +'"><p class="edit-card">EDIT</p></a>'
          card += '<div class="col-md-8">';
          card += '<div class="card-body">';
          card += '<h5 class="card-title">'+ data[i].currency +'</h5>';
          card += '<p class="card-text">'+ data[i].comment +'</p>';
-         card += '<p class="card-text"><small class="text-muted">'+ rest +'</small></p>';
+         card += '<p class="card-text"><small class="text-muted">'+ rest +" "+ time +'</small></p>';
          card += '</div>';
          card += '</div>';
          card += '</div>';

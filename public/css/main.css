@@ -210,8 +210,10 @@ input[type=text], input[type=email], input[type=password] {
 #crdrex{
   border: 1px solid black;
   margin-left: 5px;
-  background-color: #9BC1AF;
+  background-color: black;
+  color: white;
 }
+
 #set-budget-container{
   display: none;
   width: 302px;
@@ -246,5 +248,56 @@ input[type=text], input[type=email], input[type=password] {
 .close-card:hover{
   opacity: 1;
 }
-
- 
+.edit-card{
+  position: absolute;
+  right: 37px;
+  top: 25px
+  background-color: #35FF93
+  opacity: .35;
+  transition: .5s;
+}
+.reset-text {
+  position: absolute;
+  left: 250px;
+  right: 250px;
+  top:250px;
+  bottom: 250px; 
+}
+.reset-block {
+  position: absolute;
+  top: 180px;
+  left: 584px;
+  width: 300px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+.reset-block a{
+  padding: 5px;
+  color: #35FF93;
+  text-decoration: none;
+  opacity: 0.35;
+}
+.reset-block a:hover{
+  opacity: 1;
+}
+.signin-block-wrong{
+  position: absolute;
+  top: 180px;
+  left: 74px;
+  width: 300px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+.signin-block-wrong a{
+  padding: 5px;
+  color: #35FF93;
+  text-decoration: none;
+  opacity: 0.35;
+}
+.signin-block-wrong a:hover{
+  opacity: 1;
+}
