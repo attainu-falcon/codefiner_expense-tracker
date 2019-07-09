@@ -146,8 +146,12 @@ router.post('/edit/:id', function(req, res) {
 })
 
 //Delete Route
-router.post('/deleteExpense', function(req, res) {
-    console.log('deleted')
+router.get('/deleteExpense/:id', function(req, res) {
+    db.collection('expenseDetails').deleteOne({_id: require('mongodb').ObjectID(req.params.id)}, function(err, deleted) {
+        if(err) throw err;
+        console.log(deleted + " was deleted");
+        res.redirect('/users/profile')
+    });
 });
 
 router.get('/apio', function(req, res){

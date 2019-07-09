@@ -58,5 +58,5 @@ app.get('/:id', function(req, res) {
     });
 });
 
-console.log('Magic Happens at PORT 9000');
-app.listen(process.env.PORT || 9000);
+console.log('Magic Happens at PORT 3000');
+app.listen(process.env.PORT || 3000);

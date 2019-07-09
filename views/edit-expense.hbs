@@ -59,7 +59,7 @@
                     <input type="submit">
                </div>
                <div id="del-btn-expense" >
-                    <div><a href="/users/deleteExpense">DELETE EXPENSE</a></div>
+                    <div><a onclick="return confirm('Are you sure you want to delete this item?');" href="/users/deleteExpense/{{expense._id}}">DELETE EXPENSE</a></div>
                </div>
         </form>
 </div> 
