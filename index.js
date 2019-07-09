@@ -130,7 +130,10 @@ db.collection('userRegister').updateOne({username: req.body.username}, {$set: {p
   //GET
   app.get('/users/profile', function(req, res){
     if(req.session.loggedIn===true) {
-        res.render('profile', {title: 'Profile', msg: 'Welcome ' + req.session.username})
+        res.render('profile', {
+            title: 'Profile', 
+            msg: 'Welcome, ' + req.session.username
+        })
     }else{
         res.redirect('/')
     }
@@ -233,7 +236,8 @@ app.get('/users/deleteExpense/:id', function(req, res) {
 //
 app.get('/users/about', function(req, res) {
     res.render('about', {
-        title: "AboutUS"
+        title: "AboutUS",
+        msg: 'Welcome, ' + req.session.username
     });
 });
 console.log('Magic Happens at PORT 3000');

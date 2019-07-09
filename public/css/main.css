@@ -310,6 +310,12 @@ input[type=text], input[type=email], input[type=password] {
   left: 338px;
   top: 202px;
 }
+.welcome{
+  position: absolute;
+  right: 120px;
+  padding: 6px 13px;
+
+}
 .container-editExpense{
   display: none;
   width: 302px;
@@ -326,18 +332,7 @@ input[type=text], input[type=email], input[type=password] {
   position: absolute;
   right:5px;
   top:5px;
-}
-/* #allExpenses{
-  width: 100%;
-}
-#allExpenses ul{
-  list-style-type: none;
-}
-#allExpenses ul li{
-  width: 350px;
-  height: 300px;
-  display: inline-block;
-  padding: 20px;
+} padding: 20px;
 } */
 .list{
   width: 350px;
