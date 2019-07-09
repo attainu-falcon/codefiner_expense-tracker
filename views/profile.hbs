@@ -58,16 +58,13 @@
                     </div>    
                     <div class="expense-form-input-category">
                       <select id="inputsForExpense" name="category">
-                        <option value="Market">Market</option>
-                        <option value="Electricity Bills">Electricity Bills</option>
-                        <option value="Carwash">Carwash</option>
-                        <option value="Breakfastt">Breakfast</option>
-                        <option value="Dinner">Dinner</option>
-                        <option value="Tution fees">Tution fees</option>
-                        <option value="Shopping">Shopping</option>
-                        <option value="Religious/Spiriual">Religious/Spiriual</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Vacation">Vacation</option>
+                        <option value="grocery">Grocery</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="transport">Transport</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="households">Households</option>
+                        <option value="others">Others</option>
                       </select>
                     </div>                       
                  </div>  
@@ -121,8 +118,27 @@
       <div class="budget form">
         <input name="budget" type="number" class="form-control" id="budget" aria-describedby="emailHelp" placeholder="Enter your Budget" autofocus required >
       </div>
-   </div>                     
-   <div id="sbt-btn-expense" >
+      <div class="expense-form-text-currency">
+         <strong>Select Your Month</strong>
+      </div>
+      <div class="expense-form-input-currency">
+         <select id="inputsForExpense" name="month">
+            <option value="january">January</option>
+            <option value="february">February</option>
+            <option value="march">March</option>
+            <option value="april">April</option>
+            <option value="may">May</option>
+            <option value="june">June</option>
+            <option value="july">July</option>
+            <option value="august">August</option>
+            <option value="september">September</option>
+            <option value="october">October</option>
+            <option value="november">November</option>
+            <option value="december">December</option>
+         </select>
+      </div>     
+                       
+   <div id="sbt-btn-budget" >
       <input type="submit">
    </div>            
 </form>

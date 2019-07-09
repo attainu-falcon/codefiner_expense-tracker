@@ -146,6 +146,7 @@ app.post('/users/set-budget', function(req, res) {
     var budget = {
         "username": req.session.username,
         "budget": req.body.budget, 
+        "month": req.body.month,
         "date": new Date()
         }
     console.log("This is the budget " + budget);
