@@ -7,7 +7,8 @@
 /* Styling for WelcomePage i.e. 'home.hbs' */
 header{
     height: 50px;
-    position: absolute;
+    position: fixed;
+    z-index: 9;
     background-color:#60C394;
     margin-left: 0;
     margin-right: 0;
@@ -108,16 +109,6 @@ input[type=text], input[type=email], input[type=password] {
   input[type=submit]:hover{
     opacity: .7;
    }
-  .header{
-    display: none;
-    height: 50px;
-    position: absolute;
-    background-color:#0EA4FE;
-    margin-left: -8px;
-    margin-right: 0;
-    margin-top: -8px;
-    width: 100%; 
-  }
   .signin-block{
     position: absolute;
     top: 620px;
@@ -168,7 +159,8 @@ input[type=text], input[type=email], input[type=password] {
   }
 /* Styling the profile page */
 #nav{
-  position: absolute;
+  position: fixed;
+  z-index: 9;
   top: 50px;
   width: 100%;
   background-color: #35FF93;
@@ -208,12 +200,18 @@ input[type=text], input[type=email], input[type=password] {
   top: 115px;
 }
 #crdrex{
-  border: 1px solid black;
-  margin-left: 5px;
-  background-color: black;
-  color: white;
+  margin-left: 100px;
+  background-color: white;
+  opacity: .75;
+  height: 145px;
+  color: black;
+  box-shadow: 5px 10px #35FF93;
 }
-
+.text-muted{
+  position: absolute;
+  right: -357px;
+  bottom: 21px;
+}
 #set-budget-container{
   display: none;
   width: 302px;
@@ -250,11 +248,15 @@ input[type=text], input[type=email], input[type=password] {
 }
 .edit-card{
   position: absolute;
-  right: 37px;
-  top: 25px
-  background-color: #35FF93
-  opacity: .35;
-  transition: .5s;
+  right: 22px;
+  padding: 43px 17px;
+  top: 8px;
+  color: white;
+  background-color: #35FF93;
+  opacity: 1.0;
+}
+.edit-card:hover{
+  opacity: .7;
 }
 .reset-text {
   position: absolute;
@@ -300,4 +302,66 @@ input[type=text], input[type=email], input[type=password] {
 }
 .signin-block-wrong a:hover{
   opacity: 1;
+}
+.edit-expense-text{
+  position: absolute;
+  width: 654px;
+  height: 439px;
+  left: 338px;
+  top: 202px;
+}
+.container-editExpense{
+  display: none;
+  width: 302px;
+  position: absolute;
+  top: 35px;
+  height:505px;
+  left: 190px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+#close-edit-expense{
+  position: absolute;
+  right:5px;
+  top:5px;
+}
+/* #allExpenses{
+  width: 100%;
+}
+#allExpenses ul{
+  list-style-type: none;
+}
+#allExpenses ul li{
+  width: 350px;
+  height: 300px;
+  display: inline-block;
+  padding: 20px;
+} */
+.list{
+  width: 350px;
+}
+.return-button{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+#del-btn-expense{
+  position: absolute;
+  padding: 14px 57px;
+  background-color: #35FF93;
+  bottom: 10px;
+  left: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#del-btn-expense a{
+  color: white;
+  text-decoration: none;
+}
+#del-btn-expense:hover{
+  opacity: .7;
 }

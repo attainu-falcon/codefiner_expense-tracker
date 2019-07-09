@@ -16,9 +16,6 @@ var app = express();
 //My static folder will be set to 'public'
 app.use(express.static('public'));
 
-//Initialising the 'models'
-var Expense = require('./models/expenseDetails');
-
 
 //Initialise bodyParser and express-session
 app.use(express.urlencoded());
@@ -46,14 +43,20 @@ mongoClient.connect('mongodb://127.0.0.1:27017', {useNewUrlParser: true}, functi
 app.use('', home);
 app.use('/users', users);
 
+//api for the individual expenses
 app.get('/:id', function(req, res) {
     var par = req.params;
     console.log(par);
-    db.collection('expenseDetails').findOne(par, function(err, serf) {
+    db.collection('expenseDetails').findOne({_id: require('mongodb').ObjectID(req.params.id)}, function(err, serf) {
         if(err) throw err;
         console.log(serf)
-        res.json(serf);
-    })
-})
-console.log('Magic Happens at PORT 8000');
-app.listen(process.env.PORT || 8000);
+        res.render('edit-expense', {
+            title: "EditingExpense",
+            expense: serf 
+
+        });
+    });
+});
+
+console.log('Magic Happens at PORT 9000');
+app.listen(process.env.PORT || 9000);

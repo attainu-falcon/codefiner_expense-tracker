@@ -35,6 +35,9 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="/users/logout" id="logout-but">LOGOUT</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/users/about" id="about-but">ABOUT-US</a>
+            </li>
             {{!-- <li class="nav-item">
               <a class="nav-link text-white" href="/users/profile" id="hey">..</a>
             </li> --}}
@@ -74,16 +77,16 @@
                     </div>    
                     <div class="expense-form-input-currency">
                        <select id="inputsForExpense" name="currency">
-                      <option value="Market">INR</option>
-                      <option value="Electricity Bills">USD</option>
-                      <option value="Carwash">Taka</option>
-                      <option value="Breakfastt">KWD</option>
-                      <option value="Dinner">OMR</option>
-                      <option value="Tution fees">GPB</option>
-                      <option value="Shopping">AUD</option>
-                      <option value="Religious/Spiriual">EUR</option>
-                      <option value="Travel">CHF</option>
-                      <option value="Vacation">CAD</option>
+                      <option value="INR">INR</option>
+                      <option value="USD">USD</option>
+                      <option value="Taka">Taka</option>
+                      <option value="KWD">KWD</option>
+                      <option value="OMR">OMR</option>
+                      <option value="GPB">GPB</option>
+                      <option value="AUD">AUD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="CHF">CHF</option>
+                      <option value="CAD">CAD</option>
                      </select>
                     </div>                       
                  </div>                                  
@@ -146,27 +149,30 @@ $.ajax({
    dataType: "JSON",
    method: "get",
    success: function(data) {;
-      $('#here').append('<div id="allExpenses"></div>')
+      $('#here').prepend('<div id="allExpenses"><ul id="hello"></ul></div>')
       for(var i=0; i<data.length; i++) {   
      var str = data[i].date;
      var id = data[i]._id;
      var time = str.substring(12, 20);
      var rest = str.substring(0, 10);
-     var card  = "";   
-         card += '<div id="crdrex" class="card mb-3" style="max-width: 500px;">';
+     var card  = "";
+         card += '<li class="">';      
+         card += '<div id="crdrex" class="card mb-3" style="min-width: 1140px;">';
          card += '<div id="crd" class="row no-gutters">';
-         card += '<a href="#"><p class="close-card">&#10006;</p></a>'
          card += '<a href="/'+ id +'"><p class="edit-card">EDIT</p></a>'
          card += '<div class="col-md-8">';
          card += '<div class="card-body">';
-         card += '<h5 class="card-title">'+ data[i].currency +'</h5>';
+         card += '<p class="card-text">'+ data[i].category +'</p>';
+         card += '<p class="card-text">'+ data[i].currency +'</p>';
+         card += '<h5 class="card-title" style="position: absolute; top: 60px; left: 55px;"><b>'+ data[i].amount +'</b></h5>';
          card += '<p class="card-text">'+ data[i].comment +'</p>';
          card += '<p class="card-text"><small class="text-muted">'+ rest +" "+ time +'</small></p>';
          card += '</div>';
          card += '</div>';
          card += '</div>';
-         card += '</div>';         
-           $('#allExpenses').append(card);    
+         card += '</div>';
+         card += '</li>';        
+           $('#hello').append(card);    
       } 
    }
 })
