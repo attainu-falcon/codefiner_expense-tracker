@@ -21,12 +21,10 @@ router.get('/signin', function(req, res ){
 
 router.post('/signin',function(req,res){
     var profileUser= {
-           username: req.body.username,
-           password: req.body.password
-    } 
-    
-    db.collection('userRegister').findOne(profileUser, function(err, result){
-      
+        username: req.body.username,
+        password: req.body.password
+    }
+    db.collection('userRegister').findOne(profileUser, function(err, result){ 
         if(err) throw err;
         else if(!result) {
             res.render('wrong')
@@ -36,7 +34,7 @@ router.post('/signin',function(req,res){
                 console.log("Successful login for "+req.session.username);
                 res.redirect('/users/profile'); 
         }    
-   })    
+    });    
 });
 
 //Reset Password
@@ -168,4 +166,4 @@ router.get('/about', function(req, res) {
     });
 });
 
-module.exports = router;
+// module.exports = router;

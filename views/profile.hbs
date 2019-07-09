@@ -149,7 +149,7 @@ $.ajax({
    dataType: "JSON",
    method: "get",
    success: function(data) {;
-      $('#here').prepend('<div id="allExpenses"><ul id="hello"></ul></div>')
+      $('#here').append('<div id="allExpenses"><ul id="hello"></ul></div>')
       for(var i=0; i<data.length; i++) {   
      var str = data[i].date;
      var id = data[i]._id;
