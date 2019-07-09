@@ -24,7 +24,7 @@ app.use(express.static('public'));
 
 app.get('/user/graph', function(req,res) {
 
-  db.collection('expenseDetails').find({id:'001'}).toArray( function(err, result) {
+  db.collection('expenseDetails').find({id:'001', $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] }}).toArray( function(err, result) {
     var marketing,transport,grocery,household,utilities,entertainment,others;
     if (err) throw err;
     marketing = 0; transport = 0; grocery = 0; household =0; utility = 0; entertainment = 0; others = 0;
@@ -70,8 +70,104 @@ app.get('/user/graph', function(req,res) {
 
 // {$month:{ date: new Date() }}
 
-app.get('/user/graph/month', function(req,res) {
+app.get('/user/graph/month/marketing', function(req,res) {
   db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"marketing"}).toArray( function(err, result) {
+    var amount = [];
+    if (err) throw err;
+    for (var i = 0; i < result.length; i++) {
+      var expAmt = result[i].amount;
+      amount.push(expAmt);
+    }
+    return res.render('monthExp',{title:"Monthly Graph",
+                                 amount:amount,
+                          });
+
+  });
+
+});
+
+app.get('/user/graph/month/transport', function(req,res) {
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"transport"}).toArray( function(err, result) {
+    var amount = [];
+    if (err) throw err;
+    for (var i = 0; i < result.length; i++) {
+      var expAmt = result[i].amount;
+      amount.push(expAmt);
+    }
+    return res.render('monthExp',{title:"Monthly Graph",
+                                 amount:amount,
+                          });
+
+  });
+
+});
+
+app.get('/user/graph/month/grocery', function(req,res) {
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"grocery"}).toArray( function(err, result) {
+    var amount = [];
+    if (err) throw err;
+    for (var i = 0; i < result.length; i++) {
+      var expAmt = result[i].amount;
+      amount.push(expAmt);
+    }
+    return res.render('monthExp',{title:"Monthly Graph",
+                                 amount:amount,
+                          });
+
+  });
+
+});
+
+app.get('/user/graph/month/household', function(req,res) {
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"household"}).toArray( function(err, result) {
+    var amount = [];
+    if (err) throw err;
+    for (var i = 0; i < result.length; i++) {
+      var expAmt = result[i].amount;
+      amount.push(expAmt);
+    }
+    return res.render('monthExp',{title:"Monthly Graph",
+                                 amount:amount,
+                          });
+
+  });
+
+});
+
+app.get('/user/graph/month/utilities', function(req,res) {
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"utilities"}).toArray( function(err, result) {
+    var amount = [];
+    if (err) throw err;
+    for (var i = 0; i < result.length; i++) {
+      var expAmt = result[i].amount;
+      amount.push(expAmt);
+    }
+    return res.render('monthExp',{title:"Monthly Graph",
+                                 amount:amount,
+                          });
+
+  });
+
+});
+
+app.get('/user/graph/month/entertainment', function(req,res) {
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"entertainment"}).toArray( function(err, result) {
+    var amount = [];
+    if (err) throw err;
+    for (var i = 0; i < result.length; i++) {
+      var expAmt = result[i].amount;
+      amount.push(expAmt);
+    }
+    return res.render('monthExp',{title:"Monthly Graph",
+                                 amount:amount,
+                          });
+
+  });
+
+});
+
+app.get('/user/graph/month/others', function(req,res) {
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"others"}).toArray( function(err, result) {
     var amount = [];
     if (err) throw err;
     for (var i = 0; i < result.length; i++) {
@@ -89,17 +185,66 @@ app.get('/user/graph/month', function(req,res) {
 
 
 
-app.get('/user/graph/year', function(req,res) {
+app.get('/user/graph/year/marketing', function(req,res) {
   db.collection('expenseDetails').find({ $expr: { $eq: [{ $year: "$date" },{$year:{ date: new Date() }}] },category:"marketing"}).toArray( function(err, result) {
     if (err) throw err;
     console.log(result);
+    var marketing = 0;
+    for (var i = 0; i < result.length; i++) {
+      var amt = parseInt(result[i].amount);
+      marketing += Number(amt);
+    }
+    console.log(marketing);
   });
+
+  db.collection('expenseDetails').find({ $expr: { $eq: [{ $month: "$date" },6] },category:"marketing"}).toArray( function(err, result) {
+
+
+
+
+
   res.render('yearExp');
 });
 
 app.get('/user/graph/alltime', function(req,res) {
   res.render('allTimeExp');
 });
+
+
+// if(result[i].date >= 2019-06-01 && result[i].date <= 2019-06-30) {
+//   var amt = parseInt(result[i].amount);
+//   month += Number(amt);
+// }
+
+
+// app.get('/user/graph/year/marketing', function(req,res) {
+//   db.collection('expenseDetails').find({ $expr: { $eq: [{ $year: "$date" },{$year:{ date: new Date() }}] },category:"marketing"}).toArray( function(err, result) {
+//     if (err) throw err;
+//     console.log(result);
+//     var marketing = 0;
+//     for (var i = 0; i < result.length; i++) {
+//       var amt = parseInt(result[i].amount);
+//       marketing += Number(amt);
+//     }
+//     console.log(marketing);
+//
+//   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
