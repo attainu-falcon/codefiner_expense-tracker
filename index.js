@@ -14,7 +14,7 @@ var db;
 
 mongoClient.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true }, function(err, client) {
   if (err) throw err;
-  db = client.db('project_CodeFiner');
+  db = client.db('projectCodefiner');
 });
 
 
@@ -71,19 +71,18 @@ app.get('/user/graph', function(req,res) {
 
 
 app.get('/user/graph/month', function(req,res) {
-  db.collection('expenseDetails').find({}).toArray( function(err, result) {
-    // var amount = [];
+  db.collection('expenseDetails').find({id:"001"}).toArray( function(err, result) {
+    var amount = [];
     if (err) throw err;
-    console.log(result);
-    // for (var i = 0; i < result.length; i++) {
-    //   var expAmt = result[i].amount;
-    //   amount.push(expAmt);
+    for (var i = 0; i < result.length; i++) {
+      var expAmt = result[i].amount;
+      amount.push(expAmt);
     
-    // }
-    // console.log(amount);
-    // return res.render('monthExp',{title:"Monthly Graph",
-    //                              amount:amount
-    //                       });
+    }
+    console.log(amount);
+    return res.render('monthExp',{title:"Monthly Graph",
+                                 amount:amount
+                          });
 
   });
 
@@ -105,18 +104,33 @@ app.get('/user/graph/alltime', function(req,res) {
 });
 
 app.get('/user/setbudget',function (req,res){
-  db.collection('expenseDetails').find({id:"001"}).toArray( function(err, result) {
+  db.collection('expenseDetails').find({"id":"001"}).toArray( function(err, result) {
     if (err) throw err;
-    
-    console.log(result);
+    var amount = [];
+    if (err) throw err;
+    for (var i = 0; i < result.length; i++) {
+      var expAmt = result[i].amount;
+      amount.push(expAmt);
+    }
+    console.log(amount);
+    return res.render('expvsbgt',{title:"Monthly Graph",
+                                 amount:amount,
+                          });
   });
-
-      // return res.render('expvsbgt',{title:"Monthly Graph",
-      //                            amount:amount,
-      //                     });
-  });
+  db.collection('budget').find({"id":"001"}).toArray( function(err,result){
+    if (err) throw err;
+    var budget = [];
+    for (var i=0;i<result.length;i++){
+      var bgt = result[i].budget;
+      budget.push(bgt);
+    } 
+    console.log(budget);
+    return res.render('expvsbgt') , {title: "Monthly Graph",
+                                     budget : budget,
+                                    };
+  })
  
+})
 
-//save the file
 
 app.listen(3000);

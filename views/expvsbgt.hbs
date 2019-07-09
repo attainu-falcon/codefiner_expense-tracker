@@ -7,15 +7,14 @@ var mixedChart = new Chart(ctx, {
   type: 'bar',
   data: {
       datasets: [{
-          label: 'Expenses',
-          data: [10, 20, 30, 40,50,60,70,80,90],
-          backgroundColor:['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)']
+         label: 'Expense' ,
+         data: [{{amount}}]
       }, {
-          label: 'Budget',
-          data: [50, 30, 40, 60,50,40,80,10,20],
-          type: 'line'
+           type: 'line',
+          label: 'Budget' ,
+          data: [{{budget}}] 
+         
       }],
-      labels: ['January', 'February', 'March', 'April','May','June','July','August','September']
   },
   options: {
       scales: {
@@ -28,3 +27,5 @@ var mixedChart = new Chart(ctx, {
   }
 });
 </script>
+
+
