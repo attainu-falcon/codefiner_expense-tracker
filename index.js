@@ -58,9 +58,24 @@ app.get('/users/signup', function(req, res ){
 //Posting registration form
 app.post('/users/signup', function(req, res) { 
     var ObjectID = require('mongodb').ObjectID;
-    db.collection('userRegister').insertOne({_id:ObjectID, date: new Date(), name:req.body.name, email:req.body.email, username:req.body.username, password:req.body.password});
-    res.render('signin',{title: 'Login', msg: 'Succefully registered. Now you may login.'});
-    console.log(JSON.stringify(req.body) + " added to the db.userRegister"); 
+    var email = req.body.email;
+    db.collection('userRegister').findOne({email: email}, function (err, emailPresent) {
+        if(err) throw err;
+        else if (emailPresent) {
+                 res.render('already', {
+                     title: "Already registered email"
+                 })
+        } else {
+            db.collection('userRegister').insertOne({_id:ObjectID, date: new Date(), name:req.body.name, email:req.body.email, username:req.body.username, password:req.body.password});
+            console.log(JSON.stringify(req.body) + " added to the db.userRegister");
+            res.render('signin',{
+                title: 'Login', msg: 'Succefully registered. Now you may login.'
+            });         
+        }
+    });
+    // db.collection('userRegister').insertOne({_id:ObjectID, date: new Date(), name:req.body.name, email:req.body.email, username:req.body.username, password:req.body.password});
+    // res.render('signin',{title: 'Login', msg: 'Succefully registered. Now you may login.'});
+    // console.log(JSON.stringify(req.body) + " added to the db.userRegister"); 
 });
 
 //SignIn Routes

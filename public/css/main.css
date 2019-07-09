@@ -377,3 +377,85 @@ input[type=text], input[type=email], input[type=password] {
 #sbt-btn-budget:hover{
   opacity: .7;
 }
+.already{
+  position: absolute;
+  top: 180px;
+  left: 200px;
+  
+}
+.aboutOne{
+  width: 256px;
+  position: absolute;
+  top: 138px;
+  height:391px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  left: 93px;
+  border-radius: 5px;
+  background-color: #cccccc;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+.aboutTwo{
+  width: 256px;
+  position: absolute;
+  top: 138px;
+  height: 391px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  left: 526px;
+  border-radius: 5px;
+  background-color: #cccccc;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+.aboutThree{
+  width: 256px;
+  position: absolute;
+  top: 138px;
+  height: 391px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  right:124px;
+  border-radius: 5px;
+  background-color: #cccccc;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+.link{
+  position: absolute;
+  left:13px;
+  top: 321px;
+  padding: 2px 77px;
+  background-color: #35FF93;
+  border-radius: 4px;
+}
+.link a{
+  text-decoration: none;
+  color: white;
+}
+.form-group a{
+  text-decoration: none;
+  color: azure;
+}
+.link:hover{
+opacity: 0.7;
+text-decoration: none;
+}
+.nameOne{
+  position: absolute;
+  left: 46px;
+  top: 186px;
+}
+.nameTwo{
+  position: absolute;
+  left: 71px;
+  top: 186px;
+}
+.nameThree{
+  position: absolute;
+  left: 40px;
+  top: 186px;
+}
+img{
+  position: absolute;
+  left: 68px;
+  top: 31px;
+}
