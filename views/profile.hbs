@@ -1,0 +1,197 @@
+{{!-- jqueryCDN         --}}
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous">
+   </script>
+
+{{#if msg}}
+    <div id="alert-msg" class="alert alert-success text-center collapse">
+       <a href="#" id="close-alert" class="close" data-dismiss="alert">&times;</a>
+       <strong>{{msg}}</strong>
+    </div>
+ {{/if}}
+
+ {{#if error}}
+    <div id="alert-msg" class="alert alert-danger text-center collapse">
+       <a href="#" id="close-alert" class="close" data-dismiss="alert">&times;</a>
+       <strong>{{error}}</strong>
+    </div>
+ {{/if}}
+
+<div class="header"></div>
+<nav id="nav" class = "navbar navbar-dark" style="background-color:#60C394;">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Expenses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/user/graph">View Graph</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/user/expvsbgt">Exp. vs Bgt.</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#" onclick=openBudgetForm()>Set Budget</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" id="add-expense-button" href="#" onclick=openForm()>Add New Expense</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/users/logout" id="logout-but">LOGOUT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/users/about" id="about-but">ABOUT-US</a>
+            </li>
+            {{!-- <li class="nav-item">
+              <a class="nav-link text-white" href="/users/profile" id="hey">..</a>
+            </li> --}}
+         </ul>
+      </nav>
+      <div id="here"></div>
+{{!-- addExpense Button --}}
+{{!-- <a class="hvr-underline-reveal" id="add-expense-button" href="#" onclick=openForm()>ADD EXPENSE</a> --}}
+{{!-- <a class="" id="logout-button" href="/users/logout">LogOut</a> --}}
+{{!-- <i id="add-btn" class="fas fa-plus-circle" onclick="alertFnc()"></i> --}}
+<div id="add-expense-container" class="container-addExpense">
+   <a id="close-add-expense" onclick="closeForm()" href="#"><p>&#10006;</p></a>
+    <form class="form-signin" method="POST" action="/users/add-expense">
+
+               <div class="form-group">
+                    <div class="expense-form-text-category">
+                       <strong>Category</strong>
+                    </div>
+                    <div class="expense-form-input-category">
+                      <select id="inputsForExpense" name="category">
+                        <option value="grocery">Grocery</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="transport">Transport</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="households">Households</option>
+                        <option value="others">Others</option>
+                      </select>
+                    </div>
+                 </div>
+                 <div class="form-group">
+                    <div class="expense-form-text-currency">
+                       <strong>Currency</strong>
+                    </div>
+                    <div class="expense-form-input-currency">
+                       <select id="inputsForExpense" name="currency">
+                      <option value="INR">INR</option>
+                      <option value="USD">USD</option>
+                      <option value="Taka">Taka</option>
+                      <option value="KWD">KWD</option>
+                      <option value="OMR">OMR</option>
+                      <option value="GPB">GPB</option>
+                      <option value="AUD">AUD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="CHF">CHF</option>
+                      <option value="CAD">CAD</option>
+                     </select>
+                    </div>
+                 </div>
+                 <div class="form-group">
+                  <div class="expense-form-text-expense">
+                     <strong>Expense</strong>
+                 </div>
+                    <div class="expense-form-input-expense">
+                       <input name="expense" type="number" class="form-control" id="expense" aria-describedby="emailHelp" placeholder="Enter your expense" autofocus required >
+                    </div>
+                 </div>
+                 <div class="form-group">
+                  <label for="comment"><strong>Comment</strong></label>
+                  <textarea required name="comment" class="form-control" rows="5" id="comment"></textarea>
+                 </div>
+
+               <div id="sbt-btn-expense" >
+                    <input type="submit">
+               </div>
+
+        </form>
+</div>
+
+{{!-- Set-Budget --}}
+<div id="set-budget-container" class="container-set-budget">
+   <a id="close-set-budget" onclick="closeBudgetForm()" href="#"><p>&#10006;</p></a>
+<form class="form-signin" method="POST" action="/users/set-budget">
+   <div class="form-group">
+      <div class="expense-form-text-expense">
+        <strong>Your Budget</strong>
+      </div>
+      <div class="budget form">
+        <input name="budget" type="number" class="form-control" id="budget" aria-describedby="emailHelp" placeholder="Enter your Budget" autofocus required >
+      </div>
+      <div class="expense-form-text-currency">
+         <strong>Select Your Month</strong>
+      </div>
+      <div class="expense-form-input-currency">
+         <select id="inputsForExpense" name="month">
+            <option value="january">January</option>
+            <option value="february">February</option>
+            <option value="march">March</option>
+            <option value="april">April</option>
+            <option value="may">May</option>
+            <option value="june">June</option>
+            <option value="july">July</option>
+            <option value="august">August</option>
+            <option value="september">September</option>
+            <option value="october">October</option>
+            <option value="november">November</option>
+            <option value="december">December</option>
+         </select>
+      </div>
+
+   <div id="sbt-btn-budget" >
+      <input type="submit">
+   </div>
+</form>
+</div>
+
+<script>
+      function openForm() {
+  document.getElementById("add-expense-container").style.display = "block";
+  document.getElementById("set-budget-container").style.display = "none";
+}
+      function openBudgetForm() {
+  document.getElementById("set-budget-container").style.display = "block";
+  document.getElementById("add-expense-container").style.display = "none";
+}
+      function closeForm() {
+  document.getElementById("add-expense-container").style.display = "none";
+}
+      function closeBudgetForm() {
+  document.getElementById("set-budget-container").style.display = "none";
+}
+$.ajax({
+   url: "/users/api",
+   dataType: "JSON",
+   method: "get",
+   success: function(data) {;
+      $('#here').append('<div id="allExpenses"><ul id="hello"></ul></div>')
+      for(var i=0; i<data.length; i++) {
+     var str = data[i].date;
+     var id = data[i]._id;
+     var time = str.substring(12, 20);
+     var rest = str.substring(0, 10);
+     var card  = "";
+         card += '<li class="">';
+         card += '<div id="crdrex" class="card mb-3" style="min-width: 1140px;">';
+         card += '<div id="crd" class="row no-gutters">';
+         card += '<a href="/'+ id +'"><p class="edit-card">EDIT</p></a>'
+         card += '<div class="col-md-8">';
+         card += '<div class="card-body">';
+         card += '<p class="card-text">'+ data[i].category +'</p>';
+         card += '<p class="card-text">'+ data[i].currency +'</p>';
+         card += '<h5 class="card-title" style="position: absolute; top: 60px; left: 55px;"><b>'+ data[i].amount +'</b></h5>';
+         card += '<p class="card-text">'+ data[i].comment +'</p>';
+         card += '<p class="card-text"><small class="text-muted">'+ rest +" "+ time +'</small></p>';
+         card += '</div>';
+         card += '</div>';
+         card += '</div>';
+         card += '</div>';
+         card += '</li>';
+           $('#hello').append(card);
+      }
+   }
+})
+</script>

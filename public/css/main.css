@@ -1,0 +1,367 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styling for WelcomePage i.e. 'home.hbs' */
+header{
+    height: 50px;
+    position: fixed;
+    z-index: 9;
+    background-color:#60C394;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    width: 100%; 
+}
+.logo{
+  position: absolute;
+  left: 10px;
+  font-size: 32px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: black;
+  text-decoration: none;
+  opacity: 1;
+  transition: .5s;
+}
+.logo:hover{
+  opacity: .5;
+  text-decoration: none;
+}
+#signup-btn{
+    position: absolute;
+    top: 400px;
+    right: 113px;
+    padding: 12px 51px;
+    background-color: #35FF93;
+    color: white;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: 0.5s;
+}
+#signin-btn{
+    position: absolute;
+    top: 430px;
+    right: 113px;
+    padding: 12px 55px;
+    background-color: #35FF93;
+    color: white;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: 0.5s;
+}
+#signup-btn:hover, #signin-btn:hover {
+    opacity: 1;
+    color: black;
+}
+.vl {
+    border-left: 3px solid #FB7C28;
+    height: 550px;
+    opacity: 0.8;
+    position: absolute;
+    left: 70%;
+    top:170px;
+    margin-left: -3px;
+  }
+
+
+.reg-form{
+    width: 300px;
+    height: 5000px;
+    position: absolute;
+    left: 50%;
+    right:50%;
+    border: 1px solid black;
+}
+
+/* Styling for 'signup.hbs' */
+.containerSignup{
+    width: 332px;
+    position: absolute;
+    top: 180px;
+    left: 525px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 5px 10px #35FF93;
+}
+input[type=text], input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #35FF93;
+    color: white;
+  }
+  input[type=submit] {
+    width: 100%;
+    background-color: #35FF93;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    opacity: 1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input[type=submit]:hover{
+    opacity: .7;
+   }
+  .signin-block{
+    position: absolute;
+    top: 620px;
+    left: 584px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 5px 10px #35FF93;
+  }
+  .signin-block a{
+    padding: 5px;
+    color: #35FF93;
+    text-decoration: none;
+    opacity: 0.35;
+  }
+  .signin-block a:hover{
+    opacity: 1;
+  }
+
+/* Styling for signin page'signin.hbs' */
+.containerSignin{
+    width: 332px;
+    position: absolute;
+    top: 269px;
+    left: 525px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 5px 10px #35FF93;
+}
+.signup-block{
+    position: absolute;
+    top: 529px;
+    left: 594px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 5px 10px #35FF93;
+  }
+  .signup-block a{
+    padding: 5px;
+    color: #35FF93;
+    text-decoration: none;
+    opacity: 0.35;
+  }
+  .signup-block a:hover{
+    opacity: 1;
+  }
+/* Styling the profile page */
+#nav{
+  position: fixed;
+  z-index: 9;
+  top: 50px;
+  width: 100%;
+  background-color: #35FF93;
+}
+#add-btn{
+  position: absolute;
+  top:30px;
+  right:30px;
+}
+.container-addExpense{
+  display: none;
+  width: 302px;
+  position: absolute;
+  top: 269px;
+  height:435px;
+  left: 525px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+#close-add-expense{
+  position: absolute;
+  right:5px;
+  top:5px;
+}
+#hey{
+  position: absolute;
+  
+}
+#comment{
+  height: 80px;
+}
+#here{
+  position: absolute;
+  width: 50%;
+  top: 115px;
+}
+#crdrex{
+  margin-left: 100px;
+  background-color: white;
+  opacity: .75;
+  height: 145px;
+  color: black;
+  box-shadow: 5px 10px #35FF93;
+}
+.text-muted{
+  position: absolute;
+  right: -357px;
+  bottom: 21px;
+}
+#set-budget-container{
+  display: none;
+  width: 302px;
+  position: absolute;
+  top: 269px;
+  height:200px;
+  left: 525px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+#close-set-budget{
+  position: absolute;
+  right:5px;
+  top:5px;
+}
+#logout-but{
+  position: absolute;
+  right: 10px;
+}
+#logout-button:hover{
+  background-color: cyan;
+}
+.close-card{
+  position: absolute;
+  right: 3px;
+  background-color: #35FF93
+  opacity: .35;
+  transition: .5s;
+}
+.close-card:hover{
+  opacity: 1;
+}
+.edit-card{
+  position: absolute;
+  right: 22px;
+  padding: 43px 17px;
+  top: 8px;
+  color: white;
+  background-color: #35FF93;
+  opacity: 1.0;
+}
+.edit-card:hover{
+  opacity: .7;
+}
+.reset-text {
+  position: absolute;
+  left: 250px;
+  right: 250px;
+  top:250px;
+  bottom: 250px; 
+}
+.reset-block {
+  position: absolute;
+  top: 180px;
+  left: 584px;
+  width: 300px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+.reset-block a{
+  padding: 5px;
+  color: #35FF93;
+  text-decoration: none;
+  opacity: 0.35;
+}
+.reset-block a:hover{
+  opacity: 1;
+}
+.signin-block-wrong{
+  position: absolute;
+  top: 180px;
+  left: 74px;
+  width: 300px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+.signin-block-wrong a{
+  padding: 5px;
+  color: #35FF93;
+  text-decoration: none;
+  opacity: 0.35;
+}
+.signin-block-wrong a:hover{
+  opacity: 1;
+}
+.edit-expense-text{
+  position: absolute;
+  width: 654px;
+  height: 439px;
+  left: 338px;
+  top: 202px;
+}
+.container-editExpense{
+  display: none;
+  width: 302px;
+  position: absolute;
+  top: 35px;
+  height:505px;
+  left: 190px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 10px #35FF93;
+}
+#close-edit-expense{
+  position: absolute;
+  right:5px;
+  top:5px;
+}
+/* #allExpenses{
+  width: 100%;
+}
+#allExpenses ul{
+  list-style-type: none;
+}
+#allExpenses ul li{
+  width: 350px;
+  height: 300px;
+  display: inline-block;
+  padding: 20px;
+} */
+.list{
+  width: 350px;
+}
+.return-button{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+#del-btn-expense{
+  position: absolute;
+  padding: 14px 57px;
+  background-color: #35FF93;
+  bottom: 10px;
+  left: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#del-btn-expense a{
+  color: white;
+  text-decoration: none;
+}
+#del-btn-expense:hover{
+  opacity: .7;
+}

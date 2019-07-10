@@ -1,0 +1,29 @@
+<div id="mixChartContainer" style="width:80%;padding-top:100px;">
+   <canvas id="canvas" ></canvas>
+</div>
+
+<h4>Total expense in {{category}} category this year is  {{totalExp}} INR</h4>
+<script>
+var ctx = document.getElementById('canvas').getContext('2d');
+var mixedChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+      datasets: [{
+          label: 'Expense',
+          data: [{{totalExp}}],
+          backgroundColor:['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)']
+      }],
+      labels: ['This year Expense in INR']
+  },
+  options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+      }
+  }
+});
+
+</script>

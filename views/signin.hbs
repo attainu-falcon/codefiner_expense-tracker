@@ -1,0 +1,47 @@
+ {{!-- <div class="header"></div> --}}
+ {{#if msg}}
+    <div id="alert-msg" class="alert alert-success text-center collapse">
+       <a href="#" id="close-alert" class="close" data-dismiss="alert">&times;</a>
+       <strong>{{msg}}</strong>
+    </div>
+ {{/if}} 
+
+ {{#if error}}
+    <div id="alert-msg" class="alert alert-danger text-center collapse">
+       <a href="#" id="close-alert" class="close" data-dismiss="alert">&times;</a>
+       <strong>{{error}}</strong>
+    </div>
+ {{/if}} 
+ <div class="containerSignin">
+    <div class="form-popup" id="myForm">
+        <form action="/users/signin" method="POST">
+            
+            <div class="form-group">
+                <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+            </div>
+                
+                
+            <div class="form-group">
+                <input name="password" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
+            </div>
+
+            <input type="submit"> 
+        </form>
+    </div>
+ </div>
+ <div class="signup-block">
+        <small>Not a member?</small><a href="/users/signup">SignUp</a>
+       </div>
+    <script>
+        var user = document.getElementById('user').value;
+        var password = document.getElementById('pwd').value;
+
+        document.querySelector('button').addEventListener('click', function(){
+            console.log("Login button clicked");
+        })
+    $(document).ready(function(){
+       $('#close-alert').click(function(){
+           $('#alert-msg').hide('fade');
+       })
+    })
+    </script>
