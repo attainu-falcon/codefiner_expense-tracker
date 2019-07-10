@@ -38,11 +38,14 @@ mongoClient.connect('mongodb://127.0.0.1:27017', {useNewUrlParser: true}, functi
 })
 
 
+
 // Initialise the routes
 // app.use('', home);
 // app.use('/users', users);
 
+
 //Abhishek's code starts
+
 //Homepage Route
 app.get('/', function(req, res) {
     res.render('home', {
@@ -55,6 +58,7 @@ app.get('/', function(req, res) {
 app.get('/users/signup', function(req, res ){
     res.render('signup',{title:"SignUp"})
 });
+
 //Post the registration form
 // app.post('/users/signup', function(req, res) {
 //     var email = req.body. email;
@@ -97,6 +101,96 @@ app.post('/users/signup', function(req, res) {
     db.collection('userRegister').insertOne({_id:ObjectID, date: new Date(), name:req.body.name, email:req.body.email, username:req.body.username, password:req.body.password});
     res.render('signin',{title: 'Login', msg: 'Succefully registered. Now you may login.'});
     console.log(JSON.stringify(req.body) + " added to the db.userRegister");
+});
+
+//SignIn Routes
+//  2. For SignIn
+app.get('/users/signin', function(req, res ){
+    res.render('signin',{title:"SignIn"})
+});
+
+app.post('/users/signin',function(req,res){
+    var profileUser= {
+        username: req.body.username,
+        password: req.body.password
+    }
+    db.collection('userRegister').findOne(profileUser, function(err, result){
+        if(err) throw err;
+        else if(!result) {
+            res.render('wrong')
+        }else{
+            req.session.loggedIn = true;
+            req.session.username = req.body.username;
+            console.log("Successful login for "+req.session.username);
+            res.redirect('/users/profile');
+        }
+    });
+});
+
+//Reset Password
+  //GET
+  app.get('/users/reset', function(req, res) {
+    res.render('reset', {
+        title: "Reset Password"
+    })
+})
+  //POST
+  app.post('/users/reset', function(req, res) {
+    console.log(req.body);
+    var user = {
+        username: req.body.username
+    }
+    var pswd = {
+        password: req.body.password
+    }
+db.collection('userRegister').updateOne({username: req.body.username}, {$set: {password: req.body.password}}, function(err, reset){
+        if(err) throw err;
+        else{
+            console.log('Password to resetted to '+ req.body.password + " for " + req.body.username)
+            res.redirect('/users/signin')
+        }
+    })
+})
+//Profile routings
+  //GET
+  app.get('/users/profile', function(req, res){
+    if(req.session.loggedIn===true) {
+        res.render('profile', {
+            title: 'Profile',
+            msg: 'Welcome, ' + req.session.username
+        })
+    }else{
+        res.redirect('/')
+    }
+});
+//Logout Route
+app.get('/users/logout', function(req, res)  {
+    console.log(req.session.username + " just logged out.")
+    req.session.destroy();
+    res.redirect('/users/signin');
+
+
+//Posting registration form
+app.post('/users/signup', function(req, res) {
+    var ObjectID = require('mongodb').ObjectID;
+    var email = req.body.email;
+    db.collection('userRegister').findOne({email: email}, function (err, emailPresent) {
+        if(err) throw err;
+        else if (emailPresent) {
+                 res.render('already', {
+                     title: "Already registered email"
+                 })
+        } else {
+            db.collection('userRegister').insertOne({_id:ObjectID, date: new Date(), name:req.body.name, email:req.body.email, username:req.body.username, password:req.body.password});
+            console.log(JSON.stringify(req.body) + " added to the db.userRegister");
+            res.render('signin',{
+                title: 'Login', msg: 'Succefully registered. Now you may login.'
+            });
+        }
+    });
+    // db.collection('userRegister').insertOne({_id:ObjectID, date: new Date(), name:req.body.name, email:req.body.email, username:req.body.username, password:req.body.password});
+    // res.render('signin',{title: 'Login', msg: 'Succefully registered. Now you may login.'});
+    // console.log(JSON.stringify(req.body) + " added to the db.userRegister");
 });
 
 //SignIn Routes
@@ -268,6 +362,12 @@ app.get('/users/about', function(req, res) {
 //
 
 app.get('/user/graph', function(req,res) {
+
+});
+
+app.get('/user/graph', function(req,res) {
+
+
   db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] }}).toArray( function(err, result) {
     var marketing,transport,grocery,household,utilities,entertainment,others;
     if (err) throw err;
@@ -282,6 +382,7 @@ app.get('/user/graph', function(req,res) {
       } else if (result[i].category == 'grocery') {
         var amt = parseInt(result[i].amount);
         grocery += Number(amt);
+
       } else if (result[i].category == 'households') {
         var amt = parseInt(result[i].amount);
         household += Number(amt);
@@ -292,6 +393,18 @@ app.get('/user/graph', function(req,res) {
         var amt = parseInt(result[i].amount);
         entertainment += Number(amt);
       } else if (result[i].category == 'others') {
+
+      }else if (result[i].category == 'households') {
+        var amt = parseInt(result[i].amount);
+        household += Number(amt);
+      }else if (result[i].category == 'utilities') {
+        var amt = parseInt(result[i].amount);
+        utility += Number(amt);
+      }else if (result[i].category == 'entertainment') {
+        var amt = parseInt(result[i].amount);
+        entertainment += Number(amt);
+      }else if (result[i].category == 'others') {
+
         var amt = parseInt(result[i].amount);
         others += Number(amt);
       }
@@ -311,6 +424,11 @@ app.get('/user/graph', function(req,res) {
   });
 
 });
+
+
+
+//db.collection('expenseDetails').find({id:"001"}).toArray( function(err, result) {
+
 
 app.get('/user/graph/month/marketing', function(req,res) {
   db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] },category:"marketing"}).toArray( function(err, result) {
@@ -410,14 +528,25 @@ app.get('/user/graph/month/entertainment', function(req,res) {
 
 app.get('/user/graph/month/others', function(req,res) {
   db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] },category:"others"}).toArray( function(err, result) {
+
+
+
     var amount = [];
     if (err) throw err;
     for (var i = 0; i < result.length; i++) {
       var expAmt = result[i].amount;
       amount.push(expAmt);
+
     }
     return res.render('monthExp',{title:"Monthly Graph",
                                  amount:amount,
+
+    
+    }
+    console.log(amount);
+    return res.render('monthExp',{title:"Monthly Graph",
+                                 amount:amount
+
                           });
 
   });
@@ -525,6 +654,10 @@ app.get('/user/graph/year/household', function(req,res) {
 
 
 });
+
+
+
+
 
 app.get('/user/graph/year/others', function(req,res) {
   var others = 0;
@@ -684,6 +817,9 @@ app.get('/user/expvsbgt', function(req,res) {
 
 
 
+
+
+
 // db.collection('budget').find({username:req.session.username}).toArray( function(err,result){
 //   if (err) throw err;
 //   var budget = [];
@@ -696,6 +832,31 @@ app.get('/user/expvsbgt', function(req,res) {
 //                                    amount : amount, budget : budget,
 //                                   };
 // })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//2e4997ed97937c53fc91448ed43e636bbc642766
+
 
 
 console.log('Magic Happens at PORT 3000');
