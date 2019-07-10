@@ -1,6 +1,8 @@
-<div id="mixChartContainer">
-   <canvas id="canvas" style="width:80%;"></canvas>
+<div id="mixChartContainer" style="width:80%;padding-top:100px;">
+   <canvas id="canvas" ></canvas>
 </div>
+
+<h4>Total expense in {{category}} category this year is  {{totalExp}} INR</h4>
 <script>
 var ctx = document.getElementById('canvas').getContext('2d');
 var mixedChart = new Chart(ctx, {
@@ -8,16 +10,10 @@ var mixedChart = new Chart(ctx, {
   data: {
       datasets: [{
           label: 'Expense',
-          data: [10, 20, 30, 50],
+          data: [{{totalExp}}],
           backgroundColor:['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)']
-      }, {
-          label: 'Budget',
-          data: [40, 40, 40, 40],
-          backgroundColor:['#E5EEE9'],
-          // Changes this dataset to become a line
-          type: 'line'
       }],
-      labels: ['January', 'February', 'March', 'April']
+      labels: ['This year Expense in INR']
   },
   options: {
       scales: {
