@@ -1,5 +1,5 @@
-<div id="mixChartContainer">
-   <canvas id="canvas" style="width:80%;"></canvas>
+<div id="mixChartContainer" style="width:80%;padding-top:100px;">
+   <canvas id="canvas" ></canvas>
 </div>
 <script>
 var ctx = document.getElementById('canvas').getContext('2d');
@@ -8,12 +8,14 @@ var mixedChart = new Chart(ctx, {
   data: {
       datasets: [{
          label: 'Expense' ,
-         data: [{{amount}}]
+         data: [{{amount}}],
+         backgroundColor:['rgba(54, 162, 235, 0.2)']
       }, {
-           type: 'line',
+           type: 'bar',
           label: 'Budget' ,
-          data: [{{budget}}] 
-         
+          data: [{{budget}}],
+          backgroundColor:['rgba(255,0,0,0.2)']
+
       }],
   },
   options: {
@@ -27,5 +29,9 @@ var mixedChart = new Chart(ctx, {
   }
 });
 </script>
+
+
+
+
 
 

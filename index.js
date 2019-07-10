@@ -289,7 +289,7 @@ app.get('/user/graph', function(req,res) {
 
 });
 
-collection('expenseDetails').find({id:"001"}).toArray( function(err, result) {
+//db.collection('expenseDetails').find({id:"001"}).toArray( function(err, result) {
 
 app.get('/user/graph/month/marketing', function(req,res) {
   db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] },category:"marketing"}).toArray( function(err, result) {
@@ -389,7 +389,7 @@ app.get('/user/graph/month/entertainment', function(req,res) {
 
 app.get('/user/graph/month/others', function(req,res) {
   db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] },category:"others"}).toArray( function(err, result) {
->>>>>>> 2e4997ed97937c53fc91448ed43e636bbc642766
+//2e4997ed97937c53fc91448ed43e636bbc642766
     var amount = [];
     if (err) throw err;
     for (var i = 0; i < result.length; i++) {
@@ -640,33 +640,25 @@ app.get('/user/alltime/others', function(req,res) {
 
 
 app.get('/user/expvsbgt', function(req,res) {
-  db.collection('expenseDetails').find({"id":"001"}).toArray( function(err, result) {
-    if (err) throw err;
-    var amount = [];
+  db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] }}).toArray( function(err, result) {
+    var amount = 0;var budget;
     if (err) throw err;
     for (var i = 0; i < result.length; i++) {
-      var expAmt = result[i].amount;
-      amount.push(expAmt);
+      var amt = parseInt(result[i].amount);
+      amount += Number(amt);
     }
-    console.log(amount);
-    return res.render('expvsbgt',{title:"Monthly Graph",
-                                 amount:amount,
-                          });
+    db.collection('budgetDetails').find({username:req.session.username,$expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] }}).toArray( function(err,result) {
+      if (err) throw err;
+      console.log(parseInt(result[0].budget));
+      budget = parseInt(result[0].budget);
+      return res.render('expvsbgt',{title:"Expense Vs Budget",
+                                   amount:amount,budget:budget
+                                    });
+    });
+
+
   });
-  db.collection('budget').find({"id":"001"}).toArray( function(err,result){
-    if (err) throw err;
-    var budget = [];
-    for (var i=0;i<result.length;i++){
-      var bgt = result[i].budget;
-      budget.push(bgt);
-    } 
-    console.log(budget);
-    return res.render('expvsbgt') , {title: "Monthly Graph",
-                                     budget : budget,
-                                    };
-  })
- 
-})
+
 });
 
 
@@ -681,8 +673,7 @@ app.get('/user/expvsbgt', function(req,res) {
 
 
 
-
->>>>>>> 2e4997ed97937c53fc91448ed43e636bbc642766
+//2e4997ed97937c53fc91448ed43e636bbc642766
 
 
 console.log('Magic Happens at PORT 3000');
