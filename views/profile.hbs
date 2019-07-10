@@ -1,14 +1,15 @@
-{{!-- jqueryCDN         --}}
-   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous">
-   </script>
+{{!-- jqueryCDN  Bootstrap CDN  --}}
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 {{#if msg}}
     <div id="alert-msg" class="alert alert-success text-center collapse">
        <a href="#" id="close-alert" class="close" data-dismiss="alert">&times;</a>
        <strong>{{msg}}</strong>
     </div>
- {{/if}} 
+ {{/if}}
 
  {{#if error}}
     <div id="alert-msg" class="alert alert-danger text-center collapse">
@@ -24,7 +25,10 @@
               <a class="nav-link active" href="#">Expenses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">View Graph</a>
+              <a class="nav-link text-white" href="/user/graph">View Graph</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/user/expvsbgt">Exp. vs Bgt.</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="#" onclick=openBudgetForm()>Set Budget</a>
@@ -36,7 +40,7 @@
               <a class="nav-link text-white" href="/users/logout" id="logout-but">LOGOUT</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="/users/about" id="about-but">ABOUT-US</a>
+              <a class="nav-link text-white" href="/users/about" id="about-but">About-Us</a>
             </li>
             {{!-- <li class="nav-item">
               <a class="nav-link text-white" href="/users/profile" id="hey">..</a>
@@ -52,11 +56,11 @@
 <div id="add-expense-container" class="container-addExpense">
    <a id="close-add-expense" onclick="closeForm()" href="#"><p>&#10006;</p></a>
     <form class="form-signin" method="POST" action="/users/add-expense">
-                                            
+
                <div class="form-group">
                     <div class="expense-form-text-category">
                        <strong>Category</strong>
-                    </div>    
+                    </div>
                     <div class="expense-form-input-category">
                       <select id="inputsForExpense" name="category">
                         <option value="grocery">Grocery</option>
@@ -67,12 +71,12 @@
                         <option value="households">Households</option>
                         <option value="others">Others</option>
                       </select>
-                    </div>                       
-                 </div>  
+                    </div>
+                 </div>
                  <div class="form-group">
                     <div class="expense-form-text-currency">
                        <strong>Currency</strong>
-                    </div>    
+                    </div>
                     <div class="expense-form-input-currency">
                        <select id="inputsForExpense" name="currency">
                       <option value="INR">INR</option>
@@ -86,33 +90,33 @@
                       <option value="CHF">CHF</option>
                       <option value="CAD">CAD</option>
                      </select>
-                    </div>                       
-                 </div>                                  
-                 <div class="form-group"> 
+                    </div>
+                 </div>
+                 <div class="form-group">
                   <div class="expense-form-text-expense">
                      <strong>Expense</strong>
                  </div>
                     <div class="expense-form-input-expense">
                        <input name="expense" type="number" class="form-control" id="expense" aria-describedby="emailHelp" placeholder="Enter your expense" autofocus required >
                     </div>
-                 </div>     
+                 </div>
                  <div class="form-group">
                   <label for="comment"><strong>Comment</strong></label>
                   <textarea required name="comment" class="form-control" rows="5" id="comment"></textarea>
-                 </div>                                   
-                 
+                 </div>
+
                <div id="sbt-btn-expense" >
                     <input type="submit">
                </div>
-            
+
         </form>
 </div>
 
 {{!-- Set-Budget --}}
 <div id="set-budget-container" class="container-set-budget">
    <a id="close-set-budget" onclick="closeBudgetForm()" href="#"><p>&#10006;</p></a>
-<form class="form-signin" method="POST" action="/users/set-budget">                                                                                         
-   <div class="form-group"> 
+<form class="form-signin" method="POST" action="/users/set-budget">
+   <div class="form-group">
       <div class="expense-form-text-expense">
         <strong>Your Budget</strong>
       </div>
@@ -137,11 +141,11 @@
             <option value="november">November</option>
             <option value="december">December</option>
          </select>
-      </div>     
-                       
+      </div>
+
    <div id="sbt-btn-budget" >
       <input type="submit">
-   </div>            
+   </div>
 </form>
 </div>
 
@@ -149,31 +153,30 @@
       function openForm() {
   document.getElementById("add-expense-container").style.display = "block";
   document.getElementById("set-budget-container").style.display = "none";
-} 
+}
       function openBudgetForm() {
   document.getElementById("set-budget-container").style.display = "block";
   document.getElementById("add-expense-container").style.display = "none";
-} 
+}
       function closeForm() {
   document.getElementById("add-expense-container").style.display = "none";
-} 
+}
       function closeBudgetForm() {
   document.getElementById("set-budget-container").style.display = "none";
-} 
-
+}
 $.ajax({
    url: "/users/api",
    dataType: "JSON",
    method: "get",
    success: function(data) {;
       $('#here').append('<div id="allExpenses"><ul id="hello"></ul></div>')
-      for(var i=0; i<data.length; i++) {   
+      for(var i=0; i<data.length; i++) {
      var str = data[i].date;
      var id = data[i]._id;
      var time = str.substring(12, 20);
      var rest = str.substring(0, 10);
      var card  = "";
-         card += '<li class="">';      
+         card += '<li class="">';
          card += '<div id="crdrex" class="card mb-3" style="min-width: 1140px;">';
          card += '<div id="crd" class="row no-gutters">';
          card += '<a href="/'+ id +'"><p class="edit-card">EDIT</p></a>'
@@ -188,10 +191,9 @@ $.ajax({
          card += '</div>';
          card += '</div>';
          card += '</div>';
-         card += '</li>';        
-           $('#hello').append(card);    
-      } 
+         card += '</li>';
+           $('#hello').append(card);
+      }
    }
 })
-
 </script>
