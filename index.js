@@ -522,7 +522,7 @@ app.get('/user/alltime/marketing', function(req,res) {
   var marketingAmt = 0;
   db.collection('expenseDetails').find({username:req.session.username,category:"marketing"}).toArray( function(err, result) {
     if (err) throw err;
-    
+
     for (var i = 0; i < result.length; i++) {
       var amt = parseInt(result[i].amount);
       marketingAmt += Number(amt);
@@ -631,9 +631,54 @@ app.get('/user/alltime/others', function(req,res) {
 });
 
 
+// app.get('/user/expvsbgt', function(req,res) {
+//   res.render('expvsbgt',{title: "Exp. vs Bgt"});
+// });
+
 app.get('/user/expvsbgt', function(req,res) {
-  res.render('expvsbgt',{title: "Exp. vs Bgt"});
+  db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] }}).toArray( function(err, result) {
+    var amount = 0;var budget;
+    if (err) throw err;
+    for (var i = 0; i < result.length; i++) {
+      var amt = parseInt(result[i].amount);
+      amount += Number(amt);
+    }
+    db.collection('budgetDetails').find({username:req.session.username,$expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] }}).toArray( function(err,result) {
+      if (err) throw err;
+      console.log(parseInt(result[0].budget));
+      budget = parseInt(result[0].budget);
+      return res.render('expvsbgt',{title:"Expense Vs Budget",
+                                   amount:amount,budget:budget
+                                    });
+    });
+
+
+  });
+
 });
+
+
+
+// db.collection('budget').find({username:req.session.username}).toArray( function(err,result){
+//   if (err) throw err;
+//   var budget = [];
+//   for (var i=0;i<result.length;i++){
+//     var bgt = result[i].budget;
+//     budget.push(bgt);
+//   }
+//   console.log(budget);
+//   return res.render('expvsbgt') , {title: "Monthly Graph",
+//                                    amount : amount, budget : budget,
+//                                   };
+// })
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,31 @@
+<div id="mixChartContainer" style="width:80%;padding-top:100px;">
+   <canvas id="canvas" ></canvas>
+</div>
+<script>
+var ctx = document.getElementById('canvas').getContext('2d');
+var mixedChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+      datasets: [{
+         label: 'Expense' ,
+         data: [{{amount}}],
+         backgroundColor:['rgba(54, 162, 235, 0.2)']
+      }, {
+           type: 'bar',
+          label: 'Budget' ,
+          data: [{{budget}}],
+          backgroundColor:['rgba(255,0,0,0.2)']
+
+      }],
+  },
+  options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+      }
+  }
+});
+</script>
