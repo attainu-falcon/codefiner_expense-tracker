@@ -38,6 +38,7 @@ mongoClient.connect('mongodb://127.0.0.1:27017', {useNewUrlParser: true}, functi
 })
 
 
+
 // Initialise the routes
 // app.use('', home);
 // app.use('/users', users);
@@ -47,6 +48,7 @@ app.get('/', function(req, res) {
     res.render('home', {
         title: "Welcome"
     })
+
 });
 
 //SignUp Routes
@@ -287,6 +289,8 @@ app.get('/user/graph', function(req,res) {
 
 });
 
+//db.collection('expenseDetails').find({id:"001"}).toArray( function(err, result) {
+
 app.get('/user/graph/month/marketing', function(req,res) {
   db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] },category:"marketing"}).toArray( function(err, result) {
     var amount = [];
@@ -385,14 +389,17 @@ app.get('/user/graph/month/entertainment', function(req,res) {
 
 app.get('/user/graph/month/others', function(req,res) {
   db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] },category:"others"}).toArray( function(err, result) {
+//2e4997ed97937c53fc91448ed43e636bbc642766
     var amount = [];
     if (err) throw err;
     for (var i = 0; i < result.length; i++) {
       var expAmt = result[i].amount;
       amount.push(expAmt);
+    
     }
+    console.log(amount);
     return res.render('monthExp',{title:"Monthly Graph",
-                                 amount:amount,
+                                 amount:amount
                           });
 
   });
@@ -500,6 +507,7 @@ app.get('/user/graph/year/household', function(req,res) {
 
 
 });
+
 
 app.get('/user/graph/year/others', function(req,res) {
   var others = 0;
@@ -658,7 +666,6 @@ app.get('/user/expvsbgt', function(req,res) {
 });
 
 
-
 // db.collection('budget').find({username:req.session.username}).toArray( function(err,result){
 //   if (err) throw err;
 //   var budget = [];
@@ -693,6 +700,7 @@ app.get('/user/expvsbgt', function(req,res) {
 
 
 
+//2e4997ed97937c53fc91448ed43e636bbc642766
 
 
 console.log('Magic Happens at PORT 3000');
