@@ -1,0 +1,69 @@
+    <div id="here" class="edit-expense-text">
+    <h3>Edit Expense</h3>
+    <div id="add-expense-container" class="container-editExpense" style="display: block;">
+       <a class="return-button" href="/users/profile"><small>Back</small></a>  
+           
+    <form class="form-signin" method="POST" action="/users/edit/{{expense._id}}">                                           
+               <div class="form-group">
+                    <div class="expense-form-text-category">
+                       <strong>Category</strong>
+                    </div>    
+                    <div class="expense-form-input-category">
+                      <select id="inputsForExpense" name="category">
+                        <option value="Market">Market</option>
+                        <option value="Electricity Bills">Electricity Bills</option>
+                        <option value="Carwash">Carwash</option>
+                        <option value="Breakfastt">Breakfast</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Tution fees">Tution fees</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Religious/Spiriual">Religious/Spiriual</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Vacation">Vacation</option>
+                      </select>
+                    </div>                       
+                 </div>  
+                 <div class="form-group">
+                    <div class="expense-form-text-currency">
+                       <strong>Currency</strong>
+                    </div>    
+                    <div class="expense-form-input-currency">
+                       <select id="inputsForExpense" name="currency">
+                      <option value="INR">INR</option>
+                      <option value="USD">USD</option>
+                      <option value="Taka">Taka</option>
+                      <option value="KWD">KWD</option>
+                      <option value="OMR">OMR</option>
+                      <option value="GPB">GPB</option>
+                      <option value="AUD">AUD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="CHF">CHF</option>
+                      <option value="CAF">CAD</option>
+                     </select>
+                    </div>                       
+                 </div>                                  
+                 <div class="form-group"> 
+                  <div class="expense-form-text-expense">
+                     <strong>Expense</strong>
+                 </div>
+                    <div class="expense-form-input-expense">
+                       <input name="expense" type="number" class="form-control" value="{{expense.amount}}" id="expense" aria-describedby="emailHelp" placeholder="Enter your expense" autofocus required >
+                    </div>
+                 </div>     
+                 <div class="form-group">
+                  <label for="comment"><strong>Comment</strong></label>
+                  <textarea required name="comment" class="form-control" value="" rows="5" id="comment">{{expense.comment}}</textarea>
+                 </div>                                   
+                 
+               <div id="sbt-btn-expense" >
+                    <input type="submit">
+               </div>
+               <div id="del-btn-expense" >
+                    <div><a onclick="return confirm('Are you sure you want to delete this item?');" href="/users/deleteExpense/{{expense._id}}">DELETE EXPENSE</a></div>
+               </div>
+        </form>
+</div> 
+</div>
+
+
+

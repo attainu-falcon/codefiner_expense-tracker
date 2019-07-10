@@ -1,0 +1,30 @@
+{{!-- <div class="header"></div> --}}
+<div class="containerSignup">
+    <div class="signup-form">
+        <form class="form-signin" method="POST" action="/users/signup">
+              <div class="form-group">                  
+                    <input name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Full Name" required >
+                 </div>                
+                 <div class="form-group">  
+                    <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required >                       
+                 </div>                                    
+                 <div class="form-group">
+                    <input name="username" type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username" autofocus required >
+                 </div>                                        
+                 <div class="form-group">
+                    <input name="password" type="password" class="form-control" id="password" aria-describedby="emailHelp" placeholder="Enter Password" required >
+                 </div>                                        
+                 <div class="form-group">    
+                    <input name="cpassword" type="password" class="form-control" id="cpassword" aria-describedby="emailHelp" placeholder="Confirm Password" required >
+              </div>
+
+            <input id="sbt-btn" type="submit">
+        </form>
+    </div>
+</div>
+            <div class="signin-block">
+             <small>Already a member?</small><a href="/users/signin">SignIn</a>
+            </div>
+            <script src="http://code.jquery.com/jquery.js"></script>
+            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+            <script src="./js/registration.js"></script>

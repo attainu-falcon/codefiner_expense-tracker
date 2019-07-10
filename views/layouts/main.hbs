@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>{{title}}</title>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -10,24 +11,10 @@
       crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js" charset="utf-8"></script>
   </head>
-  <body style="background-color:#E5EEE9;" >
-    <div class="text-center">
-      <img width="80px"src="../Images/Logo.png" alt="Logo"/>
-    </div>
-
-      <nav class = "navbar navbar-dark" style="background-color:#60C394;">
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Expenses</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="#">View Graph</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Set Budget</a>
-            </li>
-         </ul>
-      </nav>
+<body>
+    <header>
+      <a class="logo" href="/users/profile"><strong>Expense</strong>Tracker</a>
+    </header>
       {{{body}}}
 
   </body>
