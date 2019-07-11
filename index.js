@@ -240,7 +240,7 @@ app.get('/users/about', function(req, res) {
         msg: 'Welcome, ' + req.session.username
     });
 });
-
+// View category wise expense
 app.get('/user/graph', function(req,res) {
 
   db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] }}).toArray( function(err, result) {
@@ -631,9 +631,6 @@ app.get('/user/alltime/others', function(req,res) {
 });
 
 
-// app.get('/user/expvsbgt', function(req,res) {
-//   res.render('expvsbgt',{title: "Exp. vs Bgt"});
-// });
 
 app.get('/user/expvsbgt', function(req,res) {
   db.collection('expenseDetails').find({username:req.session.username, $expr: { $eq: [{ $month: "$date" },{$month:{ date: new Date() }}] }}).toArray( function(err, result) {
@@ -658,19 +655,6 @@ app.get('/user/expvsbgt', function(req,res) {
 });
 
 
-
-// db.collection('budget').find({username:req.session.username}).toArray( function(err,result){
-//   if (err) throw err;
-//   var budget = [];
-//   for (var i=0;i<result.length;i++){
-//     var bgt = result[i].budget;
-//     budget.push(bgt);
-//   }
-//   console.log(budget);
-//   return res.render('expvsbgt') , {title: "Monthly Graph",
-//                                    amount : amount, budget : budget,
-//                                   };
-// })
 
 
 
